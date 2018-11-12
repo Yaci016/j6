@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><?= $title ?></title>
+    <link rel="stylesheet" href="public/css/normalize-3.0.3.min.css">
+    <link rel="stylesheet" href="public/vendors/fontawesome5.5/css/all.css">
+    <link rel="stylesheet" href="public/css/main.css">
+    <script src="public/js/main.js"></script>
+</head>
+<body>
+<div id="red"></div>
+<header>
+    <h1><img src="public/images/logo.gif" alt="logo 3wa">Restaurant - Made in America</h1>
+    <div id="login_group">
+        <a href="#">créer un compte</a>
+        <a href="#">Connexion</a>
+    </div>
+</header>
+<?= $content ?>
+<footer>
+    <img src="public/images/payment/mastercard.png" alt="mastercard">
+    <img src="public/images/payment/paypal.png" alt="paypal">
+    <img src="public/images/payment/visa.png" alt="visa">
+    <p>Réalisé avec <i class="fas fa-heart"></i> par les éléves de la 3W academy</p>
+</footer>
+</body>
+</html>

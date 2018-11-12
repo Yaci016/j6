@@ -1,0 +1,31 @@
+<?php ob_start(); ?>
+    <style>
+        .liste_aliment:last-child{
+            background: #40e661;
+            color:white;
+        }
+    </style>
+<main>
+<!-- rajouter le code de la vue dde l'accueil ici -->
+<h2>Carte du restaurant</h2>
+<?php foreach($liste_aliment as $aliment) {
+
+    $prix_vente = explode(".", $aliment['prix_vente'])?>
+    <article class="liste_aliment">
+
+    <img src="public/images/meals/<?= $aliment['photo']?>" alt="<?= $aliment['name']?>">
+
+    <div class="description">
+        <h3><?= $aliment['name']?></h3>
+        <p><?= $aliment['description']?></p>
+    </div>
+
+    <div class="prix_vente"><p><?= number_format($aliment['prix_vente'], 2) ?> € </p></div>
+
+    </article>
+    <?php }?>
+    </main>
+
+<?php $content = ob_get_clean();
+$title = 'page d\'accueil';
+require 'view/frontEnd/layout.phtml';?>

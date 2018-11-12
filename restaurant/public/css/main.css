@@ -1,0 +1,75 @@
+body {
+    background: url('../images/background.png');
+}
+
+header,main,footer {
+    width:90vw;
+    margin: 0 auto;
+}
+header {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+}
+#red {
+    background:red;
+    height:1rem;
+    width:100vw;
+    flex-basis: 100%;
+}
+header img {
+    height:3rem;
+    width:50px;align-self: center;
+
+}
+header h1 {
+    flex-basis: 100%;
+}
+#login_group {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#login_group a {
+    min-width: fit-content;
+    text-align: left;
+    background-color:red;
+    padding: 1%;
+    margin: 1%;
+    border-radius: 10px;
+    text-decoration: none;
+    color:white;
+}
+footer {
+    margin:1%;
+    text-align: center;
+}
+.fa-heart {
+    color:red;
+}
+h2 {
+    text-align: center;
+}
+.liste_aliment{
+    display: flex;
+    flex-direction: row;
+    transition: all 1s;
+}
+.liste_aliment:hover{
+    background: #40e661;
+    color:white;
+}
+.liste_aliment img {
+    flex-basis: 20%;
+}
+.liste_aliment .description {
+    flex-basis: 80%;
+}
+.liste_aliment .prix_vente {
+    flex-basis: 20%;
+    justify-self:  center;
+    align-self:center;
+    text-align: center;
+}
+
