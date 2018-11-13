@@ -12,7 +12,7 @@ namespace restaurant\model\frontEnd;
 class Manager
 {
 protected function dbConnect(){
-    /* when @ school
+    /* when @ school */
     $servername = "127.0.0.1";
     $username = "root";
     $password = "troiswa";
@@ -26,8 +26,8 @@ protected function dbConnect(){
         echo "Connection failed: " . $e->getMessage();
     }
     return $bdd;
-    */
-    /* when @ home*/
+
+    /* when @ home
     $servername = "localhost";
     $port = "3308";
     $username = "root";
@@ -42,6 +42,7 @@ protected function dbConnect(){
         echo "Connection failed: " . $e->getMessage();
     }
     return $bdd;
+    */
 }
 
 }

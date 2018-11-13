@@ -1,0 +1,78 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Yacine
+ * Date: 11/13/2018 0013
+ * Time: 12:05 AM
+ */
+ob_start();
+?>
+    <form action="index.php?action=checkSignUp" method="post">
+    <fieldset>
+        <legend><i class="fas fa-lock"></i> identitée et coordonnéees</legend>
+        <div class="clear"></div>
+        <table class="container">
+            <tr>
+                <td><label for="Prenom">Prenom: </label></td>
+                <td><input type="text" name="Prenom" id="Prenom"></td>
+            </tr>
+            <tr>
+                <td><label for="Nom">Nom: </label></td>
+                <td><input type="text" name="Nom" id="Nom"></td>
+            </tr>
+            <tr>
+                <td>Date de naissance:</td>
+                <?php require 'date_naissance_input.php' ?>
+            </tr>
+            <tr>
+                <td style="vertical-align: top">adresse:</td>
+                <td><textarea name="adresse" placeholder="103 Rue jean bernard" rows="7" cols="25"></textarea></td>
+            </tr>
+            <tr>
+                <td>ville:</td>
+                <td><input type="text" name="ville" id="ville" placeholder="roubaix"></td>
+            </tr>
+            <tr>
+                <td>code postal:</td>
+                <td><input type="text" name="Code_postal" id="Code_postal" maxlength="5" size="5" placeholder="59100">
+                </td>
+            </tr>
+            <tr>
+                <td>telephone:</td>
+                <td><input type="text" name="telephone" id="Code_postal" maxlength="10" size="10"
+                           placeholder="06 XX XX XX XX"></td>
+            </tr>
+        </table>
+
+    </fieldset>
+
+
+        <fieldset>
+            <legend><i class="fas fa-lock"></i> information d'authentification</legend>
+            <div class="clear"></div>
+            <table class="container">
+                <tr>
+                    <td><label for="email">email : </label></td>
+                    <td><input type="email" name="email" id="email" placeholder="xyz@azw.XX"></td>
+                </tr>
+                <tr>
+                    <td><label for="Pass">Mot de passe : </label></td>
+                    <td><input type="text" name="Pass" id="Pass" placeholder="******" minlength="8"></td>
+                </tr>
+                <tr>
+                    <td><p></p></td>
+                    <td>
+                        <p>
+                            <button type="submit" id="Ajouter" name="Inscription">Ajouter</button>
+                            <button type="reset" id="Annuler">Annuler</button>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+</form>
+<?php
+$content = ob_get_clean();
+$title = 'page d\'inscription';
+require 'view/frontEnd/layout.phtml';
+?>
