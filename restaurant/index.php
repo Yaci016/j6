@@ -1,9 +1,15 @@
 <?php
 require 'controller/frontEnd.php';
 if (isset($_GET['action'])) {
-    if ($_GET['action'] === 'home'){
+    $action = $_GET['action'] ;
+    //rajouter des if else if ici pour les pages du site
+    if ($action === 'home'){
         getMeal();
-    }//rajouter des else if ici pour les autres pages
+    } elseif ($action === 'SignUp'){
+
+    }elseif ($action === 'LogIn') {
+
+}
 } else { //definit la page principal si aucune page n'est demandé
     getMeal();
 }
