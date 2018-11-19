@@ -15,12 +15,24 @@ if (isset($_GET['action'])) {
             CheckSignUpinfo();
             break;
         case 'LogIn'://page de connexion
-
+            logIn();
+            break;
+        case 'Account':
+            ViewAccount();
+            break;
+        case 'reservation':
+            Reserve();
+            break;
+        case 'order':
+            Order();
+            break;
+        case 'LogOff':
+            LogOff();
             break;
         default ://si aucun argument n'est rentré pour la variable $_get['action'] on affiche la page d'accueil
-            header('location:index.php');
+            header('location:index.php?action=home');
             break;
     }
 } else { //definit la page principal si aucune page n'est demandé
-    getMeal();
+    header('location:index.php?action=home');
 }

@@ -1,17 +1,11 @@
 <?php ob_start(); ?>
-    <style>
-        .liste_aliment:last-child{
-            background: #40e661;
-            color:white;
-        }
-    </style>
 <main>
-
-    <div id="message_info"><?php if (isset($message_info)) {
+    <?php if (isset($message_info)) {
             echo $message_info;
-            $message_info = "";
-            echo '<script src="public/js/afficherComment.js"></script>';
-        } //affiche les message d'erreur / reussite ?></div>
+        $message_info = null;
+        echo '<script src="public/js/afficherMessageInfo.js"></script>';
+    } //affiche les message d'erreur / reussite
+    ?>
 <!-- rajouter le code de la vue dde l'accueil ici -->
 <h2>Carte du restaurant</h2>
 <?php foreach($liste_aliment as $aliment) {

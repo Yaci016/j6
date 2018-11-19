@@ -1,3 +1,7 @@
+input {
+    border: none;
+    outline: none;
+}
 body {
     background: url('../images/background.png');
 }
@@ -73,12 +77,68 @@ h2 {
     text-align: center;
 }
 
+.liste_aliment:last-child {
+    background: #40e661;
+    color: white;
+}
+
+#sign_up_form {
+    margin: 0 auto;
+}
 table {
     border-spacing: 10px;
     border-collapse: separate;
 }
 
+td {
+    width: fit-content;
+    white-space: nowrap;
+}
 #message_info {
-    display: none;
-    background: red;
+    border-radius: 5px;
+    margin: 0 auto;
+    border: 1px dotted rgba(0, 0, 0, 0.62);
+    width: fit-content;
+    padding: 1%;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+}
+
+section#section_connexion {
+    display: flex;
+    align-items: center;
+}
+
+section#section_connexion, form {
+    white-space: nowrap;
+    width: fit-content;
+
+}
+
+section#section_connexion form {
+    margin: auto;
+}
+
+#Connexion {
+    cursor: pointer;
+
+}
+
+input[name="email"], input[name="mdp"] {
+    padding: 1%;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+}
+
+button[name="Connexion"] {
+    background: rgba(44, 255, 35, 0.54);
+    padding: 2%;
+    border-radius: 5px;
+    border: none;
+    outline: none;
 }

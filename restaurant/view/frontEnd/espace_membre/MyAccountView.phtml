@@ -1,0 +1,29 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Yacine
+ * Date: 11/13/2018 0013
+ * Time: 12:05 AM
+ */
+ob_start(); ?>
+
+    <main>
+        <h2>Mon compte</h2>
+        <fieldset>
+            <legend>Mes informations</legend>
+            <p>nom : <?= $ConectedUser->getnom() ?></p>
+            <p>prenom : <?= $ConectedUser->getprenom() ?></p>
+            <p>ville : <?= $ConectedUser->getville() ?></p>
+            <p>adresse : <?= $ConectedUser->getadresse() ?></p>
+            <p>email : <?= $ConectedUser->getemail() ?></p>
+            <p>code postal : <?= $ConectedUser->getcode_postal() ?></p>
+            <p>telephone : <?= $ConectedUser->getnom() ?></p>
+
+        </fieldset>
+    </main>
+
+<?php
+$content = ob_get_clean();
+$title = 'Mon compte';
+require 'view/frontEnd/layout.phtml';
+?>

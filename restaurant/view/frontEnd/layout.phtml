@@ -14,11 +14,25 @@
 <body>
 <div id="red"></div>
 <header>
-    <h1><a href="index.php?action=home"><img src="public/images/logo.gif" alt="logo 3wa">Restaurant - Made in
+    <h1><a href="index.php"><img src="public/images/logo.gif" alt="logo 3wa">Restaurant - Made in
             America</a></h1>
     <div id="login_group">
-        <a href="index.php?action=SignUp">créer un compte</a>
-        <a href="#">Connexion</a>
+        <?php if (!isset($_SESSION['id'])) { ?>
+            <a href="index.php?action=SignUp">créer un compte</a>
+            <a id="Connexion" class="active">Connexion</a>
+            <section id="section_connexion" style="display: none">
+                <form action="index.php?action=LogIn" method="post">
+                    <input type="text" placeholder="email" name="email" id="email">
+                    <input type="password" placeholder="Mot de passe" name="mdp">
+                    <button class="active" type="submit" name="Connexion">Connexion</button>
+                </form>
+            </section>
+        <?php } else { ?>
+            <a href="index.php?action=Account" style="">Mon compte</a>
+            <a href="index.php?action=reservation" style="">Reserver une table</a>
+            <a href="index.php?action=order" style="">commander des aliments</a>
+            <a href="index.php?action=LogOff" style="">Deconnexion</a>
+        <?php } ?>
     </div>
 </header>
 <?= $content ?>
