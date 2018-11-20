@@ -65,18 +65,17 @@ ob_start(); ?>
                 var handler = function (e) {
                     e.preventDefault();
                     var value = p.textContent;
-                    p.innerHTML = '<input type="text" name="' + type + '" pattern="' + regex + '" id="nom" placeholder="' + value + '">'
+                    p.innerHTML = '<input type="text" name="' + type + '" pattern="' + regex + '" id="nom" placeholder="' + value + '">';
                     icone.classList.remove('fa-pen');
                     icone.classList.add('fa-check');
                     button.setAttribute('name', type);
-                    var lol = button.getAttribute('name');
                     button.removeEventListener("click", handler)
                 };
                 button.addEventListener('click', handler);
             }
 
 
-            changeParagraphToInput(document.querySelector('#nom'), document.querySelector('.buttonNom'), document.querySelector('.nom'), 'nom', '/[a-zA-Z]{3,20}/');
+            changeParagraphToInput(document.querySelector('#nom'), document.querySelector('.buttonNom'), document.querySelector('.nom'), 'nom', '[a-zA-Z]{3,20}');
             changeParagraphToInput(document.querySelector('#prenom'), document.querySelector('.buttonPrenom'), document.querySelector('.prenom'), 'prenom', '/[a-zA-Z]{3,20}/');
             changeParagraphToInput(document.querySelector('#ville'), document.querySelector('.buttonVille'), document.querySelector('.ville'), 'ville', '/[a-zA-Z]{3,20}/');
             changeParagraphToInput(document.querySelector('#adresse'), document.querySelector('.buttonAdresse'), document.querySelector('.adresse'), 'adresse', '/[a-zA-Z]{3,20}/');

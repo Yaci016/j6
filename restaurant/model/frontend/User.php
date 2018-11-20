@@ -106,7 +106,12 @@ class User extends Manager
     {
         if (!preg_match(" /[a-zA-Z]{3,20}/ ", $nom)) {
             $_SESSION['nom'] = true;
+            return;
         }
+        $bdd = $this-> dbConnect();
+        $sql = "UPDATE `user` SET `nom` = ? WHERE `user`.`id` = ?";
+        $updateNom = $bdd -> prepare($sql);
+        $updateNom -> execute(array($nom,$this->id));
         $this->nom = $nom;
     }
 

@@ -67,6 +67,12 @@ function logIn()
 function ViewAccount()
 {
     global $ConectedUser;
+    if (isset($_POST)) {
+        $attributes = ['nom','prenom','ville','adresse','email','code_postal','telephone'];
+        foreach ($attributes as $attribute){
+            isset($_POST[$attribute]) ? CheckEditInfo($attribute,$_POST[$attribute],$ConectedUser): null;
+        }
+    }
     require_once 'view/frontEnd/espace_membre/MyAccountView.phtml';
 }
 
@@ -77,21 +83,34 @@ function ViewAccount()
 // 
 function CheckEditInfo($attribute, $value, \restaurant\model\frontEnd\User $user)
 {
+    var_dump($_POST);
+    var_dump($user);
+    var_dump($value);
+    var_dump($attribute);
     switch ($attribute) {
         case 'nom':
             $user->setnom($value);
             break;
         case 'prenom':
+            $user ->setprenom($value);
             break;
         case 'ville':
+            $user ->setville($value);
             break;
         case 'adresse':
+            $user ->setadresse($value);
             break;
         case 'email':
+            $user ->setemail($value);
             break;
         case 'code_postal':
+            $user ->setcode_postal($value);
             break;
         case 'telephone':
+            $user ->setphone($value);
+            break;
+        default :
+            null;
             break;
     }
 }
