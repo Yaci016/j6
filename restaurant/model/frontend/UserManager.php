@@ -70,12 +70,21 @@ class UserManager extends Manager
         }
 
         if ($ville !== "") {
-            if (!preg_match(" /[a-zA-Z]{3,40}/ ", $ville)) {
+            if (!preg_match(" /[a-zA-Z]{3,25}/ ", $ville)) {
                 $_SESSION['ville'] = true;
             }
         } elseif ($ville === "") {
             $ville = null;
         }
+
+         if ($adresse !== "") {
+            if (!preg_match(" /[a-zA-Z0-9_ ]{3,40}/ ", $adresse)) {
+                $_SESSION['adresse'] = true;
+            }
+        } elseif ($adresse === "") {
+            $adresse = null;
+        }
+
 
         if ($telephone !== "") {
             if (!preg_match(" /^([0]\d\s)(\d\d\s){3}(\d\d)$/", $telephone)) {

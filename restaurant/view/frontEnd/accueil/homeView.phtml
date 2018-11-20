@@ -1,12 +1,6 @@
 <?php ob_start(); ?>
 <main>
-    <?php if (isset($message_info)) {
-            echo $message_info;
-        $message_info = null;
-        echo '<script src="public/js/afficherMessageInfo.js"></script>';
-    } //affiche les message d'erreur / reussite
-    ?>
-<!-- rajouter le code de la vue dde l'accueil ici -->
+<!-- rajouter le code de la vue de l'accueil ici -->
 <h2>Carte du restaurant</h2>
 <?php foreach($liste_aliment as $aliment) {
 

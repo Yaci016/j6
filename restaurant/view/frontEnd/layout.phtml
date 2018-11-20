@@ -27,14 +27,22 @@
                     <button class="active" type="submit" name="Connexion">Connexion</button>
                 </form>
             </section>
-        <?php } else { ?>
+        <?php } else { global $ConectedUser; ?>
             <a href="index.php?action=Account" style="">Mon compte</a>
             <a href="index.php?action=reservation" style="">Reserver une table</a>
             <a href="index.php?action=order" style="">commander des aliments</a>
-            <a href="index.php?action=LogOff" style="">Deconnexion</a>
+            
+          <div><?php $user = $_SESSION['user'];echo '<p>bonjour </p>'.'  <span><a href="index.php?action=Account" style=""> '.' '.$ConectedUser -> getnom().' '.$ConectedUser -> getprenom().'</a></span>' ?></div>
+           <a href="index.php?action=LogOff" style="">Deconnexion</a>
         <?php } ?>
     </div>
 </header>
+<?php $message_info = checkErrors(); if (isset($message_info)) {
+            echo $message_info;
+        $message_info = null;
+        echo '<script src="public/js/afficherMessageInfo.js"></script>';
+    } //affiche les message d'erreur / reussite
+    ?>
 <?= $content ?>
 <footer>
     <img src="public/images/payment/mastercard.png" alt="mastercard">

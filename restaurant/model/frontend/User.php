@@ -54,6 +54,9 @@ class User extends Manager
     {
         return ['id'];
     }
+    public function getid(){
+        return $this->id;
+    }
     public function getnom()
     {
         return $this->nom;
@@ -101,7 +104,7 @@ class User extends Manager
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//done
     public function setnom($nom)
     {
         if (!preg_match(" /[a-zA-Z]{3,20}/ ", $nom)) {
@@ -114,50 +117,126 @@ class User extends Manager
         $updateNom -> execute(array($nom,$this->id));
         $this->nom = $nom;
     }
-
+//done
     public function setprenom($prenom)
     {
         if ($prenom !== "") {
             if (!preg_match(" /[a-zA-Z]{3,20}/ ", $prenom)) {
                 $_SESSION['prenom'] = true;
+                return;
             }
         }
 
+        $bdd = $this-> dbConnect();
+        $sql = "UPDATE `user` SET `prenom` = ? WHERE `user`.`id` = ?";
+        $updatePrenom = $bdd -> prepare($sql);
+        $updatePrenom -> execute(array($prenom,$this->id));
+
         $this->prenom = $prenom;
     }
-
+//pas done
     public function setemail($email)
     {
+        
+        //condition
+            if (!preg_match(" /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ ", $email)) {
+                $_SESSION['email'] = true;
+                return;
+            }
+        $bdd = $this-> dbConnect();
+        $sql = "UPDATE `user` SET `email` = ? WHERE `user`.`id` = ?";
+        $updateemail = $bdd -> prepare($sql);
+        $updateemail -> execute(array($email,$this->id));
         $this->email = $email;
     }
-
+//pas done
     public function setdate_de_naissance($date_de_naissance)
     {
+        //condition
+            if (!preg_match(" /^([0-3][0-9]{3,3})(\-)([0-3]{0,1}[0-9])(\-)([0-3]{0,1}[0-9])$/ ", $date_de_naissance)) {
+                $_SESSION['date_de_naissance'] = true;
+                return;
+            }
+        //si condition valide on update la bdd
+        $bdd = $this-> dbConnect();
+        $sql = "UPDATE `user` SET `date_de_naissance` = ? WHERE `user`.`id` = ?";
+        $updatedate_de_naissance = $bdd -> prepare($sql);
+        $updatedate_de_naissance -> execute(array($date_de_naissance,$this->id));
         $this->date_de_naissance = $date_de_naissance;
     }
-
+//pas done
     public function setmdp($mdp)
     {
+        //condition
+            if (!preg_match(" /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/ ", $mdp)) {
+                $_SESSION['mot de passe'] = true;
+                return;
+            }
+        //si condition valide on update la bdd
+          $bdd = $this-> dbConnect();
+        $sql = "UPDATE `user` SET `mdp` = ? WHERE `user`.`id` = ?";
+        $updatemdp = $bdd -> prepare($sql);
+        $updatemdp -> execute(array($mdp,$this->id));
         $this->mdp = $mdp;
     }
-
+//done
     public function setadresse($adresse)
     {
+        //condition
+            if (!preg_match(" /[a-zA-Z0-9_ ]{3,25}/ ", $adresse)) {
+                $_SESSION['adresse'] = true;
+                return;
+            }
+        //si condition valide on update la bdd
+          $bdd = $this-> dbConnect();
+        $sql = "UPDATE `user` SET `adresse` = ? WHERE `user`.`id` = ?";
+        $updateadresse = $bdd -> prepare($sql);
+        $updateadresse -> execute(array($adresse,$this->id));
         $this->adresse = $adresse;
     }
-
+//done
     public function setcode_postal($code_postal)
     {
+        //condition
+            if (!preg_match(" /[0-9]{5}/ ", $code_postal)) {
+                $_SESSION['code postal'] = true;
+                return;
+            }
+        //si condition valide on update la bdd
+          $bdd = $this-> dbConnect();
+        $sql = "UPDATE `user` SET `code_postal` = ? WHERE `user`.`id` = ?";
+        $updatecode_postal = $bdd -> prepare($sql);
+        $updatecode_postal -> execute(array($code_postal,$this->id));
         $this->code_postal = $code_postal;
     }
-
+//done
     public function setville($ville)
     {
+        //condition
+            if (!preg_match(" /[a-zA-Z]{3,25}/ ", $ville)) {
+                $_SESSION['ville'] = true;
+                return;
+            }
+        //si condition valide on update la bdd
+          $bdd = $this-> dbConnect();
+        $sql = "UPDATE `user` SET `ville` = ? WHERE `user`.`id` = ?";
+        $updateville = $bdd -> prepare($sql);
+        $updateville -> execute(array($ville,$this->id));
         $this->ville = $ville;
     }
-
+//done
     public function setphone($phone)
     {
+        //condition
+            if (!preg_match(" /^([0]\d\s)(\d\d\s){3}(\d\d)$/ ", $phone)) {
+                $_SESSION['telephone'] = true;
+                return;
+            }
+        //si condition valide on update la bdd
+          $bdd = $this-> dbConnect();
+        $sql = "UPDATE `user` SET `phone` = ? WHERE `user`.`id` = ?";
+        $updatephone = $bdd -> prepare($sql);
+        $updatephone  -> execute(array($phone,$this->id));
         $this->phone = $phone;
     }
 }

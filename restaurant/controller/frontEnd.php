@@ -4,7 +4,6 @@ require 'model/frontend/model.php';
 
 function getMeal()
 {
-    $message_info = checkErrors();
     $meals = new MealManager();
     $liste_aliment = $meals->getMeals();
     //rajouter la logique presente sur l'accueil ici
@@ -67,7 +66,7 @@ function logIn()
 function ViewAccount()
 {
     global $ConectedUser;
-    if (isset($_POST)) {
+           if (isset($_POST)) {
         $attributes = ['nom','prenom','ville','adresse','email','code_postal','telephone'];
         foreach ($attributes as $attribute){
             isset($_POST[$attribute]) ? CheckEditInfo($attribute,$_POST[$attribute],$ConectedUser): null;
@@ -83,10 +82,7 @@ function ViewAccount()
 // 
 function CheckEditInfo($attribute, $value, \restaurant\model\frontEnd\User $user)
 {
-    var_dump($_POST);
-    var_dump($user);
-    var_dump($value);
-    var_dump($attribute);
+    
     switch ($attribute) {
         case 'nom':
             $user->setnom($value);
@@ -116,7 +112,15 @@ function CheckEditInfo($attribute, $value, \restaurant\model\frontEnd\User $user
 }
 function Reserve()
 {
-
+if (isset($_POST['year'])) {
+    var_dump($_POST);
+    $date_reservation = $_POST['year'] . '-' . $_POST['month'] . '-' . $_POST['day']. ' '. $_POST['hours'].':'. $_POST['minutes'].':'. '00';
+    global $ConectedUser;
+    $reservation = new  \restaurant\model\frontEnd\Reservation;
+     
+    $reservation -> ajouterReservation($ConectedUser->getid(),$date_reservation,$_POST['nombre_couvert']);
+}
+require_once ('view/frontEnd/espace_membre/ReserverView.phtml');
 }
 
 function Order()
@@ -175,10 +179,14 @@ function checkErrors()
         isset($message) ? $message .= '<p>erreur format : mot de passe</p>' : $message = '<p>erreur format : mot de passe</p>';
     }
     if (isset($_SESSION['date'])) {
-        var_dump($_SESSION['date']);
-        unset($_SESSION['date']);
+            unset($_SESSION['date']);
         isset($message) ? $message .= '<p>erreur format : date</p>' : $message = '<p>erreur format : date</p>';
     }
+        if (isset($_SESSION['adresse'])) {
+        unset($_SESSION['adresse']);
+        isset($message) ? $message .= '<p>erreur format : adresse</p>' : $message = '<p>erreur format : adresse</p>';
+    }
+
     if (isset($_SESSION['code postal'])) {
         unset($_SESSION['code postal']);
         isset($message) ? $message .= '<p>erreur format : code postal</p>' : $message = '<p>erreur format : code postal</p>';

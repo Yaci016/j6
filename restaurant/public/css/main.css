@@ -5,27 +5,26 @@ input {
 body {
     background: url('../images/background.png');
 }
-
-header,main,footer {
-    width:90vw;
+header, main, footer {
+    width: 90vw;
     margin: 0 auto;
 }
 header {
-    display:flex;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     text-align: center;
 }
 #red {
-    background:red;
-    height:1rem;
-    width:100vw;
+    background: red;
+    height: 1rem;
+    width: 100vw;
     flex-basis: 100%;
 }
 header img {
-    height:3rem;
-    width:50px;align-self: center;
-
+    height: 3rem;
+    width: 50px;
+    align-self: center;
 }
 header h1 {
     flex-basis: 100%;
@@ -35,34 +34,48 @@ header h1 {
     display: flex;
     justify-content: space-between;
 }
-#login_group a {
+#login_group > a {
     min-width: fit-content;
     text-align: left;
-    background-color:red;
+    background-color: red;
     padding: 1%;
     margin: 1%;
     border-radius: 10px;
     text-decoration: none;
-    color:white;
+    color: white;
+}
+#login_group > div {
+    display:flex;
+    align-items: center;
+}
+#login_group > div > span {
+    margin-left:5px;
+    margin-right:-25rem;
+}
+#login_group > div  a {
+    margin:0;
+    text-decoration: none;
+    color:red;
+
 }
 footer {
-    margin:1%;
+    margin: 1%;
     text-align: center;
 }
 .fa-heart {
-    color:red;
+    color: red;
 }
 h2 {
     text-align: center;
 }
-.liste_aliment{
+.liste_aliment {
     display: flex;
     flex-direction: row;
     transition: all 1s;
 }
-.liste_aliment:hover{
+.liste_aliment:hover {
     background: #40e661;
-    color:white;
+    color: white;
 }
 .liste_aliment img {
     flex-basis: 20%;
@@ -72,16 +85,14 @@ h2 {
 }
 .liste_aliment .prix_vente {
     flex-basis: 20%;
-    justify-self:  center;
-    align-self:center;
+    justify-self: center;
+    align-self: center;
     text-align: center;
 }
-
 .liste_aliment:last-child {
     background: #40e661;
     color: white;
 }
-
 #sign_up_form {
     margin: 0 auto;
 }
@@ -89,7 +100,6 @@ table {
     border-spacing: 10px;
     border-collapse: separate;
 }
-
 td {
     width: fit-content;
     white-space: nowrap;
@@ -106,35 +116,26 @@ td {
     -o-transition: all 1s;
     transition: all 1s;
 }
-
 section#section_connexion {
     display: flex;
     align-items: center;
 }
-
 section#section_connexion, form {
     white-space: nowrap;
     width: fit-content;
-
 }
-
 section#section_connexion form {
     margin: auto;
 }
-
 #Connexion {
     cursor: pointer;
-
 }
-
 input[name="email"], input[name="mdp"] {
     padding: 1%;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-
 }
-
 button[name="Connexion"] {
     background: rgba(44, 255, 35, 0.54);
     padding: 2%;
@@ -142,3 +143,22 @@ button[name="Connexion"] {
     border: none;
     outline: none;
 }
+/* css for my account page*/
+#My_account_infos {
+    width: fit-content;
+}
+#My_account_infos p {
+    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+}
+#My_account_infos i {
+    cursor: pointer;
+    margin-left: 1rem;
+}
+#My_account_infos button {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+/* css for my account page*/

@@ -1,0 +1,32 @@
+<?php  ob_start(); ?>
+<style>
+	.Titre-reservation {
+		text-align: left;
+	}
+	.contenue-reservation {
+		border-color: green;
+	}
+</style>
+    <main>
+<h2 class="Titre-reservation"><i class="fas fa-utensils"></i> Réservation d'une table</h2>
+<form action="index.php?action=reservation"  method="post">
+<fieldset class="contenue-reservation">
+	<legend>informations</legend>
+	<table>
+		<tr>
+			<td><label for="reservation_date">Date de réservation :</label></td>
+			 <?php require 'date_de_reservation.php' ?>
+		</tr>
+		<tr>
+			<td><label for="number_of_cutlery">Nombre de couverts : </td>
+			<td><input type="number" min="1" max="25" name="nombre_couvert" value="0"></td>
+		</tr>
+		<tr><td><button>Reserver</button></td></tr>
+	</table>
+</fieldset>
+</form>
+</main>
+<?php
+$content = ob_get_clean();
+$title = 'page de reservation';
+require 'view/frontEnd/layout.phtml';
