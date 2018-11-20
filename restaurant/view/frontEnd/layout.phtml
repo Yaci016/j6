@@ -17,7 +17,7 @@
     <h1><a href="index.php"><img src="public/images/logo.gif" alt="logo 3wa">Restaurant - Made in
             America</a></h1>
     <div id="login_group">
-        <?php if (!isset($_SESSION['id'])) { ?>
+        <?php if (!isset($_SESSION['user'])) { ?>
             <a href="index.php?action=SignUp">créer un compte</a>
             <a id="Connexion" class="active">Connexion</a>
             <section id="section_connexion" style="display: none">

@@ -24,12 +24,16 @@ class User extends Manager
 
     public function __construct($id)
     {
+        $this->id = $id;
+    }
+
+    protected function GetUser()
+    {
         $bdd = $this->dbConnect();
         $getAttributes = "SELECT * FROM user WHERE id = ? ";
         $checkLoginInBdd = $bdd->prepare($getAttributes);
-        $checkLoginInBdd->execute(array($id));
+        $checkLoginInBdd->execute(array($this->id));
         $Les_ids = $checkLoginInBdd->fetch();
-        $this->id = $Les_ids['id'];
         $this->nom = $Les_ids['nom'];
         $this->prenom = $Les_ids['prenom'];
         $this->email = $Les_ids['email'];
@@ -41,6 +45,15 @@ class User extends Manager
         $this->phone = $Les_ids['phone'];
     }
 
+    public function __wakeup()
+    {
+        $this->GetUser();
+    }
+
+    public function __sleep()
+    {
+        return ['id'];
+    }
     public function getnom()
     {
         return $this->nom;

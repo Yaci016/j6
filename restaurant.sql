@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
 --
--- Client :  localhost
--- Généré le :  Lun 12 Novembre 2018 à 16:51
--- Version du serveur :  5.7.24-0ubuntu0.16.04.1
--- Version de PHP :  7.0.32-0ubuntu0.16.04.1
+-- Host: 127.0.0.1:3308
+-- Generation Time: Nov 20, 2018 at 02:48 AM
+-- Server version: 5.7.21
+-- PHP Version: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,68 +19,79 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `restaurant`
+-- Database: `restaurant`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `admin`
+-- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id`     int(11)      NOT NULL AUTO_INCREMENT,
   `prenom` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `mdp` varchar(255) NOT NULL,
-  `nom` varchar(100) NOT NULL
+  `email`  varchar(100) NOT NULL,
+  `mdp`    varchar(255) NOT NULL,
+  `nom`    varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commandes`
+-- Table structure for table `commandes`
 --
 
-CREATE TABLE `commandes` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `prix_total` int(11) NOT NULL,
-  `date` datetime NOT NULL
+DROP TABLE IF EXISTS `commandes`;
+CREATE TABLE IF NOT EXISTS `commandes` (
+  `id`         int(11)  NOT NULL AUTO_INCREMENT,
+  `id_user`    int(11)  NOT NULL,
+  `prix_total` int(11)  NOT NULL,
+  `date`       datetime NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ligne_de_commande`
+-- Table structure for table `ligne_de_commande`
 --
 
-CREATE TABLE `ligne_de_commande` (
-  `id` int(11) NOT NULL,
-  `id_meal` int(11) NOT NULL,
-  `quantité` int(11) NOT NULL,
-  `prix_unitaire` int(11) NOT NULL
+DROP TABLE IF EXISTS `ligne_de_commande`;
+CREATE TABLE IF NOT EXISTS `ligne_de_commande` (
+  `id`            int(11) NOT NULL AUTO_INCREMENT,
+  `id_meal`       int(11) NOT NULL,
+  `quantité`      int(11) NOT NULL,
+  `prix_unitaire` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `meal`
+-- Table structure for table `meal`
 --
 
-CREATE TABLE `meal` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `categories` text NOT NULL,
-  `description` text NOT NULL,
-  `prix_achat` float NOT NULL,
-  `prix_vente` float NOT NULL,
-  `stock` int(11) NOT NULL,
-  `photo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `meal`;
+CREATE TABLE IF NOT EXISTS `meal` (
+  `id`          int(11)      NOT NULL AUTO_INCREMENT,
+  `name`        varchar(255) NOT NULL,
+  `categories`  text         NOT NULL,
+  `description` text         NOT NULL,
+  `prix_achat`  float        NOT NULL,
+  `prix_vente`  float        NOT NULL,
+  `stock`       int(11)      NOT NULL,
+  `photo`       text         NOT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 11
+  DEFAULT CHARSET = utf8;
 
 --
--- Contenu de la table `meal`
+-- Dumping data for table `meal`
 --
 
 INSERT INTO `meal` (`id`, `name`, `categories`, `description`, `prix_achat`, `prix_vente`, `stock`, `photo`) VALUES
@@ -94,108 +107,108 @@ INSERT INTO `meal` (`id`, `name`, `categories`, `description`, `prix_achat`, `pr
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reservation`
+-- Table structure for table `reservation`
 --
 
-CREATE TABLE `reservation` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `date` datetime NOT NULL,
-  `nb_couverts` int(11) NOT NULL
+DROP TABLE IF EXISTS `reservation`;
+CREATE TABLE IF NOT EXISTS `reservation` (
+  `id`          int(11)  NOT NULL AUTO_INCREMENT,
+  `id_user`     int(11)  NOT NULL,
+  `date`        datetime NOT NULL,
+  `nb_couverts` int(11)  NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(150) NOT NULL,
-  `prenom` varchar(150) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `mdp` varchar(255) NOT NULL,
-  `adresse` text NOT NULL,
-  `code_postal` int(11) NOT NULL,
-  `ville` varchar(255) NOT NULL,
-  `phone` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id`                int(11)      NOT NULL AUTO_INCREMENT,
+  `nom`               varchar(150)          DEFAULT NULL,
+  `prenom`            varchar(150)          DEFAULT NULL,
+  `email`             varchar(255) NOT NULL,
+  `date_de_naissance` date                  DEFAULT NULL,
+  `mdp`               varchar(255) NOT NULL,
+  `adresse`           text,
+  `code_postal`       int(11)               DEFAULT NULL,
+  `ville`             varchar(255)          DEFAULT NULL,
+  `phone`             varchar(60)  NOT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 7
+  DEFAULT CHARSET = utf8;
 
 --
--- Index pour les tables exportées
+-- Dumping data for table `user`
 --
 
---
--- Index pour la table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`);
+INSERT INTO `user` (`id`,
+                    `nom`,
+                    `prenom`,
+                    `email`,
+                    `date_de_naissance`,
+                    `mdp`,
+                    `adresse`,
+                    `code_postal`,
+                    `ville`,
+                    `phone`)
+VALUES (1,
+        'Kherbache',
+        'Yacine',
+        'yaci016@hotmail.fr',
+        '1939-01-01',
+        'san019',
+        '85 rue remi caughe',
+        59100,
+        'ROUBAIX',
+        '617421138'),
+       (2,
+        'Kherbache',
+        'Yacine',
+        'yacinekherbache@yaci.fr',
+        '1939-01-01',
+        'yacinekherbache@yaci.fr1',
+        '85 rue remi caughe',
+        59100,
+        'ROUBAIX',
+        '617421131'),
+       (4,
+        '',
+        '',
+        'yacinekherbache1@yaci.fr',
+        '1939-01-01',
+        '$2y$10$WzCUPG6YOoalZ5X6pqGfaeiJ.vkUK7bejivPwMWPnOSjVDgiEl07G',
+        '',
+        0,
+        '',
+        '06 17 42 11 38'),
+       (5,
+        'Kherbache',
+        'Yacine',
+        'yacinekherbache3@yaci.fr',
+        '1939-01-01',
+        '$2y$10$LpBI7J0tNKg2PBWww6GaUerHugmjmPDI5wbNiqcSd2LcHnCkvXbPa',
+        '85 rue remi caughe',
+        59100,
+        'ROUBAIX',
+        '05 17 42 11 38'),
+       (6,
+        'Kherbache',
+        'Yacine',
+        'yacinekherbache4@yaci.fr',
+        '1939-01-01',
+        '$2y$10$KSXU4RNYR8uYYaKH32zXsuaNB1Lhc6lcQun/dH2LsZGSDJaq35U5m',
+        '85 rue remi caughe',
+        59100,
+        'ROUBAIX',
+        '05 17 42 11 37');
+COMMIT;
 
---
--- Index pour la table `commandes`
---
-ALTER TABLE `commandes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `ligne_de_commande`
---
-ALTER TABLE `ligne_de_commande`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `meal`
---
-ALTER TABLE `meal`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `reservation`
---
-ALTER TABLE `reservation`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `commandes`
---
-ALTER TABLE `commandes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `ligne_de_commande`
---
-ALTER TABLE `ligne_de_commande`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `meal`
---
-ALTER TABLE `meal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
---
--- AUTO_INCREMENT pour la table `reservation`
---
-ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

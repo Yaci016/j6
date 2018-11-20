@@ -25,9 +25,9 @@ protected function dbConnect(){
     } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
-    return $bdd; */
+    return $bdd;*/
 
-    /* when @ home */
+    /* when @ home*/
     $servername = "localhost";
     $port = "3308";
     $username = "root";

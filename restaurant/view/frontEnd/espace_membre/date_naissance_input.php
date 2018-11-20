@@ -9,7 +9,12 @@
     <select name="day" id="day">
         <option value="1">1</option>
         <?php for ($i = 2; $i < 31; $i++) {
-            echo "<option value='$i'>$i</option>";
+            if ($i < 10) {
+                $zero = '0';
+            } else {
+                $zero = '';
+            }
+            echo "<option value='" . $zero . $i . "'>$i</option>";
         } ?>
     </select> / <select name="month" id="month">
         <option value="01">janvier</option>
@@ -20,11 +25,11 @@
                 $zero = '';
             }
             $month = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
-            echo "<option value='$zero.$i'>$month[$i]</option>";
+            echo "<option value='" . $zero . $i . "'>$month[$i]</option>";
         } ?>
     </select> /<select name="year" id="year">
         <option value="1939">1939</option>
-        <?php for ($i = 1940; $i < 2000; $i++) {
+        <?php for ($i = 1940; $i < 2010; $i++) {
             echo "<option value='$i'>$i</option>";
         } ?>
     </select>

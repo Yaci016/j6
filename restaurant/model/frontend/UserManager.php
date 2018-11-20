@@ -53,8 +53,9 @@ class UserManager extends Manager
         }
 
         if ($date_naissance !== "") {
-            if (!preg_match(" /^([0-3][0-9]{3,3})(\-)([0-3][0-9])(\-)([0-3]{0,1}[0-9])$/ ", $date_naissance)) {
-                $_SESSION['date'] = true;
+
+            if (!preg_match(" /^([0-3][0-9]{3,3})(\-)([0-3]{0,1}[0-9])(\-)([0-3]{0,1}[0-9])$/ ", $date_naissance)) {
+                $_SESSION['date'] = $date_naissance;
             }
         } elseif ($date_naissance === "") {
             $date_naissance = null;
@@ -92,9 +93,9 @@ class UserManager extends Manager
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //on recherche dans la table users si le mail existe deja
-        $verificationEmail = "SELECT * FROM user WHERE email = ? ";
-        $check_mail_In_Bdd = $bdd->prepare($verificationEmail);
-        $check_mail_In_Bdd->execute(array($email));
+        $verificationEmail = "SELECT * FROM user WHERE email = ? "; //ta requere sql
+        $check_mail_In_Bdd = $bdd->prepare($verificationEmail); // tu prepare ta requete sql come ca
+        $check_mail_In_Bdd->execute(array($email)); // tu execute ta requete sql avec co
         $count = $check_mail_In_Bdd->rowCount();
         if ($count != 0) {
             $email_utilise = true;
@@ -150,10 +151,12 @@ class UserManager extends Manager
             $pass_bdd = $Les_ids['mdp'];
             //on check le mot de passe si il est valide on go next
             if (password_verify($Pass, $pass_bdd)) {
-                $_SESSION['id'] = $id;
+                $ConectedUser = new \restaurant\model\frontEnd\User($id);
+                var_dump($ConectedUser);
+                $_SESSION['user'] = serialize($ConectedUser);
             }
 
-            if (isset($_SESSION['id'])) {
+            if (isset($_SESSION['user'])) {
                 $_SESSION['logIn_success'] = true;
             } else {
                 $_SESSION['logIn_fail'] = true;

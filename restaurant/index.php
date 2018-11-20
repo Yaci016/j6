@@ -1,6 +1,11 @@
 <?php
-session_start();
 require 'controller/frontEnd.php';
+session_start();
+if (isset($_SESSION['user'])) {
+    $ConectedUser = unserialize($_SESSION['user']);
+
+}
+
 if (isset($_GET['action'])) {
     $action = $_GET['action'] ;
     //rajouter des if else if ici pour les pages du site
@@ -18,6 +23,7 @@ if (isset($_GET['action'])) {
             logIn();
             break;
         case 'Account':
+            //CheckEditInfo();
             ViewAccount();
             break;
         case 'reservation':

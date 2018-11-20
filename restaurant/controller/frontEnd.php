@@ -6,7 +6,7 @@ function getMeal()
 {
     $message_info = checkErrors();
     $meals = new MealManager();
-    $liste_aliment = $meals -> getMeals();
+    $liste_aliment = $meals->getMeals();
     //rajouter la logique presente sur l'accueil ici
     require_once 'view/frontEnd/accueil/homeView.phtml';
 }
@@ -64,14 +64,37 @@ function logIn()
     }
 }
 
-
 function ViewAccount()
 {
-    $ConectedUser = new \restaurant\model\frontEnd\User($_SESSION['id']);
-    var_dump($ConectedUser);
+    global $ConectedUser;
     require_once 'view/frontEnd/espace_membre/MyAccountView.phtml';
 }
 
+//a continuer ici
+
+//TODO changer l'emplacement de #message infos du homeview a layout
+//TODO rajouter une gestion d'erreur sur le update my infos du mon compte
+// 
+function CheckEditInfo($attribute, $value, \restaurant\model\frontEnd\User $user)
+{
+    switch ($attribute) {
+        case 'nom':
+            $user->setnom($value);
+            break;
+        case 'prenom':
+            break;
+        case 'ville':
+            break;
+        case 'adresse':
+            break;
+        case 'email':
+            break;
+        case 'code_postal':
+            break;
+        case 'telephone':
+            break;
+    }
+}
 function Reserve()
 {
 
@@ -91,7 +114,7 @@ function LogOff()
 
 function checkErrors()
 {
-    $color = 'red';
+    $color = ' red';
     //inscription potential errors
     if (isset($_SESSION['used_phone_email'])) {
         unset($_SESSION['used_phone_email']);
@@ -133,6 +156,7 @@ function checkErrors()
         isset($message) ? $message .= '<p>erreur format : mot de passe</p>' : $message = '<p>erreur format : mot de passe</p>';
     }
     if (isset($_SESSION['date'])) {
+        var_dump($_SESSION['date']);
         unset($_SESSION['date']);
         isset($message) ? $message .= '<p>erreur format : date</p>' : $message = '<p>erreur format : date</p>';
     }
@@ -162,11 +186,11 @@ function checkErrors()
     if (isset($_SESSION['logIn_success'])) {
         unset($_SESSION['logIn_success']);
         $message = 'Connexion reussi.';
-        $color = 'lawngreen';
+        $color = ' lawngreen';
     };
 
 
-    isset($message) ? $message_info = '<div id="message_info" style="background:' . $color . '"><p style="color:white;">' . $message . '</p></div>' : null;
+    isset($message) ? $message_info = '<div id="message_info" style="border:1px solid' . $color . ';"><p style="color:black;font-weight:bold;">' . stripslashes($message) . '</p></div>' : null;
     if (isset($message_info)) {
         return $message_info;
     }

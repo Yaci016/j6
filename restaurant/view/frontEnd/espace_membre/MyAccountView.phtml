@@ -6,22 +6,85 @@
  * Time: 12:05 AM
  */
 ob_start(); ?>
+    <style>
+        #My_account_infos {
+            width: fit-content;
+        }
 
+        #My_account_infos p {
+            white-space: nowrap;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #My_account_infos i {
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        #My_account_infos button {
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+    </style>
     <main>
         <h2>Mon compte</h2>
-        <fieldset>
+        <form action="index.php?action=Account" method="post">
+            <fieldset id="My_account_infos">
             <legend>Mes informations</legend>
-            <p>nom : <?= $ConectedUser->getnom() ?></p>
-            <p>prenom : <?= $ConectedUser->getprenom() ?></p>
-            <p>ville : <?= $ConectedUser->getville() ?></p>
-            <p>adresse : <?= $ConectedUser->getadresse() ?></p>
-            <p>email : <?= $ConectedUser->getemail() ?></p>
-            <p>code postal : <?= $ConectedUser->getcode_postal() ?></p>
-            <p>telephone : <?= $ConectedUser->getnom() ?></p>
-
+                <p>nom : <span id="nom"><?= $ConectedUser->getnom() ?></span>
+                    <button class="buttonNom"><i class="fas fa-pen nom"></i></button>
+                </p>
+                <p>prenom : <span id="prenom"><?= $ConectedUser->getprenom() ?></span>
+                    <button class="buttonPrenom"><i class="fas fa-pen prenom"></i></button>
+                </p>
+                <p>ville : <span id="ville"><?= $ConectedUser->getville() ?></span>
+                    <button class="buttonVille"><i class="fas fa-pen ville"></i></button>
+                </p>
+                <p>adresse :<span id="adresse"> <?= $ConectedUser->getadresse() ?></span>
+                    <button class="buttonAdresse"><i class="fas fa-pen adresse"></i></button>
+                </p>
+                <p>email :<span id="email"> <?= $ConectedUser->getemail() ?></span>
+                    <button class="buttonEmail"><i class="fas fa-pen email"></i></button>
+                </p>
+                <p>code postal :<span id="code_postal"> <?= $ConectedUser->getcode_postal() ?></span>
+                    <button class="buttonCodePostal"><i class="fas fa-pen code_postal"></i></button>
+                </p>
+                <p>telephone :<span id="telephone"> <?= $ConectedUser->getphone() ?></span>
+                    <button class="buttonTelephone"><i class="fas fa-pen telephone"></i></button>
+                </p>
         </fieldset>
+        </form>
     </main>
+    <script>
+        'use strict';
+        document.addEventListener('DOMContentLoaded', function () {
 
+            function changeParagraphToInput(p, button, icone, type, regex) {
+                var handler = function (e) {
+                    e.preventDefault();
+                    var value = p.textContent;
+                    p.innerHTML = '<input type="text" name="' + type + '" pattern="' + regex + '" id="nom" placeholder="' + value + '">'
+                    icone.classList.remove('fa-pen');
+                    icone.classList.add('fa-check');
+                    button.setAttribute('name', type);
+                    var lol = button.getAttribute('name');
+                    button.removeEventListener("click", handler)
+                };
+                button.addEventListener('click', handler);
+            }
+
+
+            changeParagraphToInput(document.querySelector('#nom'), document.querySelector('.buttonNom'), document.querySelector('.nom'), 'nom', '/[a-zA-Z]{3,20}/');
+            changeParagraphToInput(document.querySelector('#prenom'), document.querySelector('.buttonPrenom'), document.querySelector('.prenom'), 'prenom', '/[a-zA-Z]{3,20}/');
+            changeParagraphToInput(document.querySelector('#ville'), document.querySelector('.buttonVille'), document.querySelector('.ville'), 'ville', '/[a-zA-Z]{3,20}/');
+            changeParagraphToInput(document.querySelector('#adresse'), document.querySelector('.buttonAdresse'), document.querySelector('.adresse'), 'adresse', '/[a-zA-Z]{3,20}/');
+            changeParagraphToInput(document.querySelector('#email'), document.querySelector('.buttonEmail'), document.querySelector('.email'), 'email', '/[a-zA-Z]{3,20}/');
+            changeParagraphToInput(document.querySelector('#code_postal'), document.querySelector('.buttonCodePostal'), document.querySelector('.code_postal'), 'code_postal', '/[a-zA-Z]{3,20}/');
+            changeParagraphToInput(document.querySelector('#telephone'), document.querySelector('.buttonTelephone'), document.querySelector('.telephone'), 'telephone', '/[a-zA-Z]{3,20}/');
+        })
+    </script>
 <?php
 $content = ob_get_clean();
 $title = 'Mon compte';
