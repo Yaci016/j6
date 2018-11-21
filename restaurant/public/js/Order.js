@@ -30,17 +30,17 @@
 			panier += tableau[i].prixTotal;
 			}
 			tableHtmlDuRecap.innerHTML += "</tr><tr><td></td><td></td><td><strong>Panier<strong> : </td> <td>"+ panier +"</td></tr>";
+        rajoutEventListenerALiconePoubelle();
 	}
 
 	function rajoutEventListenerALiconePoubelle(){///////////////////////
-
-		var trash = document.querySelectorAll('.fa-trash-alt');
-		if (trash) { 
+			trash = document.querySelectorAll('.fa-trash-alt');
+		if (trash.length !== 0) {
 		//le for //////////
-		for (var i=0;i <= trash.length;i++) {
-			//eventlistener////
+		for (var i=0;i < trash.length;i++) {
 		trash[i].addEventListener('click',function(e){
-		var id = e.id;
+		var id = e.target.id;
+		console.log(id);
 		tableau.splice(id,1);
 		localStorage.setItem('liste',JSON.stringify(tableau));
 		actualiserRecap();
@@ -53,10 +53,11 @@
 	dropDownMeal.addEventListener('change',function(e){
 		var idMeal = e.target.value;
 		Actualiserdescription(idMeal);
-	})
+	});
 
 
 	boutonAjouter.addEventListener('click',function(e){
+		e.preventDefault();
 		var quantiteWow = Number(quantite.value);
 
 		var nomAlimentSelectionne = document.getElementById('Name_meal').selectedOptions[0].text;
@@ -69,8 +70,8 @@
 		tableau.push(commande);
 		localStorage.setItem('liste',JSON.stringify(tableau));
 		tableau = JSON.parse(localStorage.getItem('liste'));
-		rajoutEventListenerALiconePoubelle();
-	})
+        actualiserRecap();
+	});
 
 
 	if (!localStorage.getItem('liste')) {
@@ -78,7 +79,6 @@
 		}else {
 		tableau = JSON.parse(localStorage.getItem('liste'));
 		actualiserRecap();
-		rajoutEventListenerALiconePoubelle();
 	}
 
-})
+});

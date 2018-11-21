@@ -39,13 +39,19 @@ foreach ($liste_aliment as $aliment) {
 </form>
 <fieldset>
 	<legend>Recapilutatif des votre commande</legend>
-	<table id="recap" width="100%">
-		<tr>
-			<th>Quantité</th>
-			<th>Produit</th>
-			<th>Prix unitaire</th>
-			<th>prix total</th>
-		</tr>
+	<table  width="100%">
+        <thead>
+        <tr>
+            <th>Quantité</th>
+            <th>Produit</th>
+            <th>Prix unitaire</th>
+            <th>prix total</th>
+        </tr>
+        </thead>
+
+        <tbody id="recap">
+
+        </tbody>
 	</table>
 </fieldset>
 </main>
