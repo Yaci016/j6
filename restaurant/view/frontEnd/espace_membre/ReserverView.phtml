@@ -1,13 +1,5 @@
 <?php  ob_start(); ?>
-<style>
-	.Titre-reservation {
-		text-align: left;
-	}
-	.contenue-reservation {
-		border-color: green;
-	}
-</style>
-    <main>
+<main class="main-reservation">
 <h2 class="Titre-reservation"><i class="fas fa-utensils"></i> Réservation d'une table</h2>
 <form action="index.php?action=reservation"  method="post">
 <fieldset class="contenue-reservation">
@@ -21,7 +13,10 @@
 			<td><label for="number_of_cutlery">Nombre de couverts : </td>
 			<td><input type="number" min="1" max="25" name="nombre_couvert" value="0"></td>
 		</tr>
-		<tr><td><button>Reserver</button></td></tr>
+		<tr>
+			<td></td> 
+			<td><button>Reserver</button></td>
+		</tr>
 	</table>
 </fieldset>
 </form>

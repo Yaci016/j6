@@ -1,0 +1,57 @@
+<?php ob_start();?>
+    <main class="main-commande">
+<h2 class="Titre-commande"><i class="fas fa-shopping-cart"></i> Passer une commande</h2>
+<form   method="post">
+<fieldset class="contenue-commande">
+	<legend>ajouter un article</legend>
+	<table>
+		<tr>
+			<td><label for="Nom_meal">Nom :</label></td>
+			<td>
+				<select name="id_meal" id="Name_meal">
+					<?php
+foreach ($liste_aliment as $aliment) {
+    echo "<option value='" . $aliment['id'] . "'>" . $aliment['name'] . "</option>";
+}?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+    <div class="description">
+    <img src="public/images/meals/<?=$premier_aliment['photo']?>" alt="<?=$premier_aliment['name']?>">
+        <p><?=$premier_aliment['description']?></p>
+        <p>Prix unitaire : <span id='prix_unitaire'><?php echo  $premier_aliment['prix_vente']?></span> €</p>
+</div>
+        </td>
+		</tr>
+		<tr>
+			<td><label for="quantity">quantité : </td>
+			<td><input type="number" min="1" max="25" name="quantite" value="1"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><button id="ajouterCommande">Ajouter</button></td>
+		</tr>
+	</table>
+</fieldset>
+</form>
+<fieldset>
+	<legend>Recapilutatif des votre commande</legend>
+	<table id="recap" width="100%">
+		<tr>
+			<th>Quantité</th>
+			<th>Produit</th>
+			<th>Prix unitaire</th>
+			<th>prix total</th>
+		</tr>
+	</table>
+</fieldset>
+</main>
+<script src="public/js/ajax.js"></script>
+<script src="public/js/Order.js"></script>
+<?php
+$content = ob_get_clean();
+$title   = 'page de commande';
+require 'view/frontEnd/layout.phtml';

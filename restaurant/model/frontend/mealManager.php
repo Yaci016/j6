@@ -10,14 +10,22 @@ class MealManager extends \restaurant\model\frontEnd\Manager
 {
     public function getMeals(){
     $bdd = $this -> dbConnect();
-        $getMeal = "SELECT * FROM `meal`";
+        $getMeals = "SELECT * FROM `meal`";
         $Meals = [];
 
-        $reponseIndex = $bdd->prepare($getMeal);
+        $reponseIndex = $bdd->prepare($getMeals);
         $reponseIndex->execute();
         while ($donnees = $reponseIndex->fetch()) {
             $Meals[] = $donnees;
         };
         return $Meals;
+    }
+    public function getMeal($id) {
+        $bdd = $this -> dbConnect();
+        $getMeal = "SELECT * FROM meal WHERE id = ?";
+         $reponseCommand = $bdd->prepare($getMeal);
+        $reponseCommand->execute(array($id));
+        $donne = $reponseCommand -> fetch();
+        return $donne;
     }
 }

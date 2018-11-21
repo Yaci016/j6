@@ -30,6 +30,9 @@ if (isset($_GET['action'])) {
         case 'order':
             Order();
             break;
+        case 'orderIdMeal':
+            ajax();
+        break;
         case 'LogOff':
             LogOff();
             break;

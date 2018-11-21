@@ -113,7 +113,6 @@ function CheckEditInfo($attribute, $value, \restaurant\model\frontEnd\User $user
 function Reserve()
 {
 if (isset($_POST['year'])) {
-    var_dump($_POST);
     $date_reservation = $_POST['year'] . '-' . $_POST['month'] . '-' . $_POST['day']. ' '. $_POST['hours'].':'. $_POST['minutes'].':'. '00';
     global $ConectedUser;
     $reservation = new  \restaurant\model\frontEnd\Reservation;
@@ -125,9 +124,19 @@ require_once ('view/frontEnd/espace_membre/ReserverView.phtml');
 
 function Order()
 {
-
+     $meals = new MealManager();
+    $liste_aliment = $meals->getMeals();
+    $premier_aliment = $meals->getMeal(1);
+require_once ('view/frontEnd/espace_membre/CommanderView.phtml');
 }
-
+function ajax(){
+    if (isset($_GET['id'])){
+        $meal = new MealManager();
+        $premier_aliment = $meal->getMeal($_GET['id']);
+        echo "<img src=\"public/images/meals/".$premier_aliment['photo']."\" alt=\"".$premier_aliment['name']."\">
+        <p>". $premier_aliment['description']."</p><p>Prix unitaire : <span id='prix_unitaire'>".$premier_aliment['prix_vente']."</span> €</p>";
+    }
+}
 
 function LogOff()
 {
@@ -213,6 +222,17 @@ function checkErrors()
     if (isset($_SESSION['logIn_success'])) {
         unset($_SESSION['logIn_success']);
         $message = 'Connexion reussi.';
+        $color = ' lawngreen';
+    };
+
+    if (isset($_SESSION['ReservationRate'])) {
+        unset($_SESSION['ReservationRate']);
+        $message = 'echec de la Reservation.';
+
+    };
+    if (isset($_SESSION['ReservationReussi'])) {
+        unset($_SESSION['ReservationReussi']);
+        $message = 'Reservation reussi.';
         $color = ' lawngreen';
     };
 
