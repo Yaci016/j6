@@ -4,6 +4,9 @@ session_start();
 if (isset($_SESSION['user'])) {
     $ConectedUser = unserialize($_SESSION['user']);
 }
+if (isset($_POST['id'])){
+    $id = $_POST['id'];
+}
 if (isset($_GET['action'])) {
     $action = $_GET['action'] ;
     //rajouter des if else if ici pour les pages du site
@@ -32,6 +35,9 @@ if (isset($_GET['action'])) {
             break;
         case 'orderIdMeal':
             ajax();
+        break;
+        case 'ConfirmOrder':
+        ConfirmOrder();
         break;
         case 'LogOff':
             LogOff();

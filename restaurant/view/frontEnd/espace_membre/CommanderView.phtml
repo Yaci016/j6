@@ -1,7 +1,7 @@
 <?php ob_start();?>
     <main class="main-commande">
 <h2 class="Titre-commande"><i class="fas fa-shopping-cart"></i> Passer une commande</h2>
-<form   method="post">
+
 <fieldset class="contenue-commande">
 	<legend>ajouter un article</legend>
 	<table>
@@ -36,7 +36,7 @@ foreach ($liste_aliment as $aliment) {
 		</tr>
 	</table>
 </fieldset>
-</form>
+<form   method="post">
 <fieldset>
 	<legend>Recapilutatif des votre commande</legend>
 	<table  width="100%">
@@ -52,8 +52,14 @@ foreach ($liste_aliment as $aliment) {
         <tbody id="recap">
 
         </tbody>
+        <th>
+        	<td></td>
+        	<td></td>
+        	<td><button id="passerCommande">Passer la commande</button></td>
+        </th>
 	</table>
 </fieldset>
+</form>
 </main>
 <script src="public/js/ajax.js"></script>
 <script src="public/js/Order.js"></script>

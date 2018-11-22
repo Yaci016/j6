@@ -127,15 +127,24 @@ function Order()
      $meals = new MealManager();
     $liste_aliment = $meals->getMeals();
     $premier_aliment = $meals->getMeal(1);
+    
 require_once ('view/frontEnd/espace_membre/CommanderView.phtml');
 }
+
+
 function ajax(){
-    if (isset($_GET['id'])){
+    global $id;
+    if (isset($id)){
+
         $meal = new MealManager();
-        $premier_aliment = $meal->getMeal($_GET['id']);
+        $premier_aliment = $meal->getMeal($id);
         echo "<img src=\"public/images/meals/".$premier_aliment['photo']."\" alt=\"".$premier_aliment['name']."\">
         <p>". $premier_aliment['description']."</p><p>Prix unitaire : <span id='prix_unitaire'>".$premier_aliment['prix_vente']."</span> €</p>";
     }
+}
+function ConfirmOrder(){
+     $data = json_decode($_POST["data"]);
+        var_dump($data);
 }
 
 function LogOff()

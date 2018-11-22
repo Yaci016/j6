@@ -37,10 +37,13 @@
         <?php } ?>
     </div>
 </header>
-<?php $message_info = checkErrors(); if (isset($message_info)) {
+<?php $message_info = checkErrors(); 
+    if (isset($message_info)) {
             echo $message_info;
         $message_info = null;
         echo '<script src="public/js/afficherMessageInfo.js"></script>';
+    } else {
+        echo'<div id="message_info">        </div>';
     } //affiche les message d'erreur / reussite
     ?>
 <?= $content ?>
