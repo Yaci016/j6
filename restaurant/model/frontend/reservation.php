@@ -9,18 +9,20 @@
 namespace restaurant\model\frontEnd;
 
 
-class Reservation extends Manager {
-	private $id,$id_user,$date,$nb_couverts;
+use restaurant\model\ClassMixte\Manager;
 
-	public function ajouterReservation($id_user,$date,$nb_couverts) {
-  $bdd = $this-> dbConnect();
+class Reservation extends Manager {
+    private $id,$id_user,$date,$nb_couverts;
+
+    public function ajouterReservation($id_user, $date, $nb_couverts) {
+        $bdd = $this-> dbConnect();
         $sql = "INSERT INTO `reservation` ( `id_user`, `date`, `nb_couverts`) VALUES (?,?,?)";
         $ajouterReservationVar = $bdd -> prepare($sql);
         $ajouterReservationVar -> execute(array($id_user,$date,$nb_couverts));
         if ($ajouterReservationVar) {
-        	 $_SESSION['ReservationReussi'] = true;
-        	 } else {
-        	 $_SESSION['ReservationRate'] = true;
-        	}
+            $_SESSION['ReservationReussi'] = true;
+        } else {
+            $_SESSION['ReservationRate'] = true;
         }
-	}
+    }
+}

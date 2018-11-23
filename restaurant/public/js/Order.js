@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	var description = document.querySelector(".description");
 	var quantite;
 	var tableHtmlDuRecap = document.querySelector("#recap");
-	var boutonPasser = document.querySelector("#passerCommande")
+	var boutonPasser = document.querySelector("#passerCommande");
+	var boutonViderPanier = document.querySelector("#ViderPanier");
 	//function actualiser description
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	function Actualiserdescription(idMeal) {
@@ -37,6 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		tableHtmlDuRecap.innerHTML += "</tr><tr><td></td><td></td><td><strong>Panier<strong> : </td> <td>" + panier + " €	</td></tr>";
 		rajoutEventListenerALiconePoubelle();
 	}
+	function ViderPanier() {
+				tableau = [];
+				localStorage.setItem('liste', JSON.stringify(tableau));
+				actualiserRecap();
+	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	function rajoutEventListenerALiconePoubelle() {
 		trash = document.querySelectorAll('.fa-trash-alt');
@@ -62,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	boutonAjouter.addEventListener('click', function(e) {
 		e.preventDefault();
-
 		quantite = document.querySelector("input[name='quantite']");
 		var quantiteWow = Number(quantite.value);
 
@@ -79,17 +84,24 @@ document.addEventListener('DOMContentLoaded', function() {
 			prixUnitaire: prixUnitaire,
 			prixTotal: prixTotal
 		};
-		localStorage.setItem('liste', JSON.stringify(tableau));
-		tableau = JSON.parse(localStorage.getItem('liste'));
-		actualiserRecap();
-		quantite.value = 1;
-	});
 
+		tableau.push(commande);
+
+		localStorage.setItem('liste', JSON.stringify(tableau));
+
+		tableau = JSON.parse(localStorage.getItem('liste'));
+
+		actualiserRecap();
+
+		quantite.value = 1;
+
+	});
+	boutonViderPanier.addEventListener('click',function(){
+		ViderPanier()
+    });
 	boutonPasser.addEventListener('click', function(e) {
 		e.preventDefault();
 		var divInfo = document.querySelector('#message_info');
-
-
 		if (tableau.length !== 0) {
 			divInfo.textContent = 'Commande validé';
 			divInfo.style.border = '1px solid green';
@@ -100,23 +112,23 @@ document.addEventListener('DOMContentLoaded', function() {
 				fadeOut(divInfo);
 			}, 5000);
 			var data = new FormData();
-			data.append('listeCommande', {data :tableau});
-			ajaxPost('index.php?action=ConfirmOrder',data , function(reponse) {
-				console.log(reponse);
-			}, true);
+			data.append("data", JSON.stringify(tableau));
+			data.append("prix_total",panier);
+			ajaxPost('index.php?action=ConfirmOrder',data, function(reponse) {
+                document.write(reponse);
+			ViderPanier();
+			}, false);
 
 		} else {
-
 			divInfo.textContent = 'votre commande est vide ... commandez avant d\'esseyer de passer une commande';
 			divInfo.style.border = '1px solid red';
-
 			//executing program
 			fadeIn(divInfo);
 			setTimeout(function() {
 				fadeOut(divInfo);
 			}, 5000);
 		}
-	})
+    });
 
 
 

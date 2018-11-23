@@ -207,3 +207,14 @@ button[name="Connexion"] {
     cursor: pointer;
     color:red;
 }
+#passerCommande,#ViderPanier{
+    padding:1%;
+    border-radius: 5px;
+    border:none;
+}
+#ViderPanier {
+    background:red;
+}
+#passerCommande {
+    background:green;
+}

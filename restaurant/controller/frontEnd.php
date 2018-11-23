@@ -1,4 +1,5 @@
 <?php
+
 require 'model/frontend/model.php';
 
 
@@ -58,8 +59,17 @@ function logIn()
         $email = htmlspecialchars($_POST['email']);
         $mdp = htmlspecialchars($_POST['mdp']);
         $logInUSer = new \restaurant\model\frontEnd\UserManager();
-        $logInUSer->signInUser($email, $mdp);
+       $login =  $logInUSer->signInUser($email, $mdp);
+       var_dump($login);
+        if ($login === false) {
+            $logInAdmin = new \restaurant\model\backEnd\AdminConnexion();
+            $loginAdminValue = $logInAdmin -> signInAdmin($email, $mdp);
+            if ($loginAdminValue) {
+                header('location:index.php?action=admin');
+            }
+        }
         header('location:index.php');
+        
     }
 }
 
@@ -143,8 +153,16 @@ function ajax(){
     }
 }
 function ConfirmOrder(){
-     $data = json_decode($_POST["data"]);
-        var_dump($data);
+    global $ConectedUser;
+    $listeCommande= json_decode($_POST['data'], true);
+    $order = new \restaurant\model\frontEnd\Order();
+    $prix_total = $_POST['prix_total'];
+    $date = date("Y-m-d H:i:s");
+    //Pour commande `id_user`, `prix_total`, `date` // Pour ligne de commande $id_Commande,$idMeal,$quantite,$prix_unit
+    $idCommande = $order -> AddOrder($ConectedUser -> getid(),$prix_total, $date);
+    foreach ($listeCommande as $key => $value) {
+        $order -> AddOrderDetails($idCommande,$value['id'],$value['quantite'],$value['prixUnitaire']);
+    }
 }
 
 function LogOff()
@@ -245,6 +263,12 @@ function checkErrors()
         $color = ' lawngreen';
     };
 
+
+    if (isset($_SESSION['logIn_success_admin'])) {
+        unset($_SESSION['logIn_success_admin']);
+        $message = 'Bon retour Monsieur L\'admin.';
+
+    };
 
     isset($message) ? $message_info = '<div id="message_info" style="border:1px solid' . $color . ';"><p style="color:black;font-weight:bold;">' . stripslashes($message) . '</p></div>' : null;
     if (isset($message_info)) {

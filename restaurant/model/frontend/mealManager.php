@@ -5,8 +5,7 @@
  * Date: 12/11/18
  * Time: 14:29
  */
-require_once 'Manager.php';
-class MealManager extends \restaurant\model\frontEnd\Manager
+class MealManager extends \restaurant\model\ClassMixte\Manager
 {
     public function getMeals(){
     $bdd = $this -> dbConnect();

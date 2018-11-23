@@ -5,12 +5,9 @@
  * Date: 13/11/18
  * Time: 09:19
  */
-//TODO Methode connexion a rajouter
-//TODO rajouter une page membre avec la possibilité de changer ses informations
-//TODO rajouter une div qui affiche les donnée et le statue connecté quand la personne se connecte
-//TODO rajouter une page pour faire une reservation
-//TODO commencer le back office (admin peux acceder a tout les infos du site.
 namespace restaurant\model\frontEnd;
+
+use restaurant\model\ClassMixte\Manager;
 
 class UserManager extends Manager
 {
@@ -77,7 +74,7 @@ class UserManager extends Manager
             $ville = null;
         }
 
-         if ($adresse !== "") {
+        if ($adresse !== "") {
             if (!preg_match(" /[a-zA-Z0-9_ ]{3,40}/ ", $adresse)) {
                 $_SESSION['adresse'] = true;
             }
@@ -167,8 +164,10 @@ class UserManager extends Manager
 
             if (isset($_SESSION['user'])) {
                 $_SESSION['logIn_success'] = true;
+                return true;
             } else {
                 $_SESSION['logIn_fail'] = true;
+                return false;
             }
         }
     }

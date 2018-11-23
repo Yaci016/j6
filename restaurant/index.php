@@ -1,8 +1,13 @@
 <?php
+date_default_timezone_set('Europe/Paris');
+require 'controller/backEnd.php';
 require 'controller/frontEnd.php';
 session_start();
 if (isset($_SESSION['user'])) {
     $ConectedUser = unserialize($_SESSION['user']);
+}
+if (isset($_SESSION['admin'])) {
+    $ConectedAdmin = unserialize($_SESSION['admin']);
 }
 if (isset($_POST['id'])){
     $id = $_POST['id'];
@@ -38,6 +43,9 @@ if (isset($_GET['action'])) {
         break;
         case 'ConfirmOrder':
         ConfirmOrder();
+        break;
+        case 'admin':
+        adminHome();
         break;
         case 'LogOff':
             LogOff();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Nov 20, 2018 at 02:48 AM
+-- Generation Time: Nov 24, 2018 at 12:04 AM
 -- Server version: 5.7.21
 -- PHP Version: 7.2.4
 
@@ -51,7 +51,24 @@ CREATE TABLE IF NOT EXISTS `commandes` (
   `prix_total` int(11)  NOT NULL,
   `date`       datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 9
+  DEFAULT CHARSET = utf8;
+
+--
+-- Dumping data for table `commandes`
+--
+
+INSERT INTO `commandes` (`id`, `id_user`, `prix_total`, `date`)
+VALUES (1, 6, 21, '2018-11-23 23:50:41'),
+       (2, 6, 3, '2018-11-23 23:52:13'),
+       (3, 6, 3, '2018-11-23 23:53:02'),
+       (4, 6, 9, '2018-11-23 23:53:05'),
+       (5, 6, 3, '2018-11-23 23:53:16'),
+       (6, 6, 6, '2018-11-23 23:53:21'),
+       (7, 6, 6, '2018-11-23 23:53:31'),
+       (8, 6, 6, '2018-11-23 23:53:50');
 
 -- --------------------------------------------------------
 
@@ -62,11 +79,23 @@ CREATE TABLE IF NOT EXISTS `commandes` (
 DROP TABLE IF EXISTS `ligne_de_commande`;
 CREATE TABLE IF NOT EXISTS `ligne_de_commande` (
   `id`            int(11) NOT NULL AUTO_INCREMENT,
+  `idCommande`    int(11) NOT NULL,
   `id_meal`       int(11) NOT NULL,
   `quantité`      int(11) NOT NULL,
   `prix_unitaire` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 3
+  DEFAULT CHARSET = utf8;
+
+--
+-- Dumping data for table `ligne_de_commande`
+--
+
+INSERT INTO `ligne_de_commande` (`id`, `idCommande`, `id_meal`, `quantité`, `prix_unitaire`)
+VALUES (1, 8, 1, 1, 3),
+       (2, 8, 1, 1, 3);
 
 -- --------------------------------------------------------
 
