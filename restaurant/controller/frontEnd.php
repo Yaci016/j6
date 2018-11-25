@@ -59,27 +59,21 @@ function logIn()
         $email = htmlspecialchars($_POST['email']);
         $mdp = htmlspecialchars($_POST['mdp']);
         $logInUSer = new \restaurant\model\frontEnd\UserManager();
-       $login =  $logInUSer->signInUser($email, $mdp);
-       var_dump($login);
+        $login = $logInUSer->signInUser($email, $mdp);
         if ($login === false) {
             $logInAdmin = new \restaurant\model\backEnd\AdminConnexion();
-            $loginAdminValue = $logInAdmin -> signInAdmin($email, $mdp);
-            if ($loginAdminValue) {
-                header('location:index.php?action=admin');
-            }
+            $logInAdmin->signInAdmin($email, $mdp);
+            header('location:index.php');
         }
-        header('location:index.php');
-        
     }
 }
-
 function ViewAccount()
 {
     global $ConectedUser;
-           if (isset($_POST)) {
-        $attributes = ['nom','prenom','ville','adresse','email','code_postal','telephone'];
-        foreach ($attributes as $attribute){
-            isset($_POST[$attribute]) ? CheckEditInfo($attribute,$_POST[$attribute],$ConectedUser): null;
+    if (isset($_POST)) {
+        $attributes = ['nom', 'prenom', 'ville', 'adresse', 'email', 'code_postal', 'telephone'];
+        foreach ($attributes as $attribute) {
+            isset($_POST[$attribute]) ? CheckEditInfo($attribute, $_POST[$attribute], $ConectedUser) : null;
         }
     }
     require_once 'view/frontEnd/espace_membre/MyAccountView.phtml';
@@ -92,79 +86,87 @@ function ViewAccount()
 // 
 function CheckEditInfo($attribute, $value, \restaurant\model\frontEnd\User $user)
 {
-    
+
     switch ($attribute) {
         case 'nom':
             $user->setnom($value);
             break;
         case 'prenom':
-            $user ->setprenom($value);
+            $user->setprenom($value);
             break;
         case 'ville':
-            $user ->setville($value);
+            $user->setville($value);
             break;
         case 'adresse':
-            $user ->setadresse($value);
+            $user->setadresse($value);
             break;
         case 'email':
-            $user ->setemail($value);
+            $user->setemail($value);
             break;
         case 'code_postal':
-            $user ->setcode_postal($value);
+            $user->setcode_postal($value);
             break;
         case 'telephone':
-            $user ->setphone($value);
+            $user->setphone($value);
             break;
         default :
             null;
             break;
     }
 }
+
 function Reserve()
 {
-if (isset($_POST['year'])) {
-    $date_reservation = $_POST['year'] . '-' . $_POST['month'] . '-' . $_POST['day']. ' '. $_POST['hours'].':'. $_POST['minutes'].':'. '00';
-    global $ConectedUser;
-    $reservation = new  \restaurant\model\frontEnd\Reservation;
-     
-    $reservation -> ajouterReservation($ConectedUser->getid(),$date_reservation,$_POST['nombre_couvert']);
-}
-require_once ('view/frontEnd/espace_membre/ReserverView.phtml');
+    if (isset($_POST['year'])) {
+        $date_reservation = $_POST['year'] . '-' . $_POST['month'] . '-' . $_POST['day'] . ' ' . $_POST['hours'] . ':' . $_POST['minutes'] . ':' . '00';
+        global $ConectedUser;
+        $reservation = new  \restaurant\model\frontEnd\Reservation;
+
+        $reservation->ajouterReservation($ConectedUser->getid(), $date_reservation, $_POST['nombre_couvert']);
+    }
+    require_once('view/frontEnd/espace_membre/ReserverView.phtml');
 }
 
 function Order()
 {
-     $meals = new MealManager();
+    $meals = new MealManager();
     $liste_aliment = $meals->getMeals();
     $premier_aliment = $meals->getMeal(1);
-    
-require_once ('view/frontEnd/espace_membre/CommanderView.phtml');
+
+    require_once('view/frontEnd/espace_membre/CommanderView.phtml');
 }
 
 
-function ajax(){
+function ajax()
+{
     global $id;
-    if (isset($id)){
+    if (isset($id)) {
 
         $meal = new MealManager();
         $premier_aliment = $meal->getMeal($id);
-        echo "<img src=\"public/images/meals/".$premier_aliment['photo']."\" alt=\"".$premier_aliment['name']."\">
-        <p>". $premier_aliment['description']."</p><p>Prix unitaire : <span id='prix_unitaire'>".$premier_aliment['prix_vente']."</span> €</p>";
-    }
-}
-function ConfirmOrder(){
-    global $ConectedUser;
-    $listeCommande= json_decode($_POST['data'], true);
-    $order = new \restaurant\model\frontEnd\Order();
-    $prix_total = $_POST['prix_total'];
-    $date = date("Y-m-d H:i:s");
-    //Pour commande `id_user`, `prix_total`, `date` // Pour ligne de commande $id_Commande,$idMeal,$quantite,$prix_unit
-    $idCommande = $order -> AddOrder($ConectedUser -> getid(),$prix_total, $date);
-    foreach ($listeCommande as $key => $value) {
-        $order -> AddOrderDetails($idCommande,$value['id'],$value['quantite'],$value['prixUnitaire']);
+        echo "<img src=\"public/images/meals/" . $premier_aliment['photo'] . "\" alt=\"" . $premier_aliment['name'] . "\">
+        <p>" . $premier_aliment['description'] . "</p><p>Prix unitaire : <span id='prix_unitaire'>" . $premier_aliment['prix_vente'] . "</span> €</p>";
     }
 }
 
+function ConfirmOrder()
+{
+    global $ConectedUser;
+    $listeCommande = json_decode($_POST['data'], true);
+    $order = new \restaurant\model\frontEnd\OrderManager();
+    $prix_total = $_POST['prix_total'];
+    $date = date("Y-m-d H:i:s");
+    //Pour commande `id_user`, `prix_total`, `date` // Pour ligne de commande $id_Commande,$idMeal,$quantite,$prix_unit
+    $idCommande = $order->AddOrder($ConectedUser->getid(), $prix_total, $date);
+    foreach ($listeCommande as $key => $value) {
+        $order->AddOrderDetails($idCommande, $value['id'], $value['quantite'], $value['prixUnitaire']);
+    }
+}
+
+//TODO INVESTIGER LA CAUSE DE POURQUOI LA SESSION ADMIN N'EST PAS PRISE EN COMPTE
+//TODO FAIRE LES PAGES Consulter les COMMANDES A/ CONSULTER LES RESERVATIONS / AJOUTER UN PRODUIT / EDITER UN PRODUIT de l'espace admin
+//TODO RAJOUTER DES CONDITION DANS L'INDEX POUR PROTEGER LACCES AU PAGES UTILISATEUR CONNECTE / ADMIN CONNECTE
+//TODO RAJOUTER DU CSS/JS  SUR LES PAGES du site POUR DONNER VIE AUX SITE
 function LogOff()
 {
     session_destroy();
@@ -215,10 +217,10 @@ function checkErrors()
         isset($message) ? $message .= '<p>erreur format : mot de passe</p>' : $message = '<p>erreur format : mot de passe</p>';
     }
     if (isset($_SESSION['date'])) {
-            unset($_SESSION['date']);
+        unset($_SESSION['date']);
         isset($message) ? $message .= '<p>erreur format : date</p>' : $message = '<p>erreur format : date</p>';
     }
-        if (isset($_SESSION['adresse'])) {
+    if (isset($_SESSION['adresse'])) {
         unset($_SESSION['adresse']);
         isset($message) ? $message .= '<p>erreur format : adresse</p>' : $message = '<p>erreur format : adresse</p>';
     }
@@ -275,3 +277,9 @@ function checkErrors()
         return $message_info;
     }
 }
+
+function error()
+{
+    require_once('view/Error404.phtml');
+}
+

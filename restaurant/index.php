@@ -17,7 +17,12 @@ if (isset($_GET['action'])) {
     //rajouter des if else if ici pour les pages du site
     switch ($action) {
         case 'home' : //page d'accueil
-            getMeal();
+            global $ConectedAdmin;
+            if (isset($ConectedAdmin)) {
+                adminHome();
+            } else {
+                getMeal();
+            }
             break;
         case 'SignUp'://page d'inscription
             ViewSignUp();
@@ -30,25 +35,51 @@ if (isset($_GET['action'])) {
             break;
         case 'Account':
             //CheckEditInfo();
-            ViewAccount();
+            global $ConectedUser;
+            if (isset($ConectedUser)) {
+                ViewAccount();
+            } else {
+                header('location:index.php?action=error');
+            }
+
             break;
         case 'reservation':
-            Reserve();
+            global $ConectedUser;
+            if (isset($ConectedUser)) {
+                Reserve();
+            } else {
+                header('location:index.php?action=error');
+            }
             break;
         case 'order':
-            Order();
+            global $ConectedUser;
+            if (isset($ConectedUser)) {
+                Order();
+            } else {
+                header('location:index.php?action=error');
+            }
             break;
         case 'orderIdMeal':
-            ajax();
-        break;
+            global $ConectedUser;
+            if (isset($ConectedUser)) {
+                ajax();
+            } else {
+                header('location:index.php?action=error');
+            }
+            break;
         case 'ConfirmOrder':
-        ConfirmOrder();
-        break;
-        case 'admin':
-        adminHome();
-        break;
+            global $ConectedUser;
+            if (isset($ConectedUser)) {
+                ConfirmOrder();
+            } else {
+                header('location:index.php?action=error');
+            }
+            break;
         case 'LogOff':
             LogOff();
+            break;
+        case 'error':
+            error();
             break;
         default ://si aucun argument n'est rentré pour la variable $_get['action'] on affiche la page d'accueil
             header('location:index.php?action=home');

@@ -5253,7 +5253,7 @@ first-order:
   changes:
     - '4.6'
     - 5.0.0
-  label: First Order
+  label: First OrderManager
   search:
     terms: []
   styles:
@@ -5262,7 +5262,7 @@ first-order:
 first-order-alt:
   changes:
     - 5.0.12
-  label: Alternate First Order
+  label: Alternate First OrderManager
   search:
     terms: []
   styles:
@@ -7488,7 +7488,7 @@ jedi:
 jedi-order:
   changes:
     - 5.0.12
-  label: Jedi Order
+  label: Jedi OrderManager
   search:
     terms:
       - star wars
