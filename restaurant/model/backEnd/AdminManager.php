@@ -4,7 +4,7 @@ namespace restaurant\model\backEnd;
 
 use restaurant\model\ClassMixte\Manager;
 
-class AdminConnexion extends Manager
+class AdminManager extends Manager
 {
     public function signInAdmin($email, $Pass)
     {

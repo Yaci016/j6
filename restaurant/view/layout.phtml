@@ -17,7 +17,7 @@
     <h1><a href="index.php"><img src="public/images/logo.gif" alt="logo 3wa">Restaurant - Made in
             America</a></h1>
     <div id="login_group">
-        <?php if (!isset($_SESSION['user'])) { ?>
+        <?php if (!isset($_SESSION['user']) && !isset($_SESSION['admin'])) { ?>
             <a href="index.php?action=SignUp">créer un compte</a>
             <a id="Connexion" class="active">Connexion</a>
             <section id="section_connexion" style="display: none">
@@ -27,13 +27,17 @@
                     <button class="active" type="submit" name="Connexion">Connexion</button>
                 </form>
             </section>
-        <?php } else { global $ConectedUser; ?>
+        <?php } elseif (isset($_SESSION['user'])) {
+            global $ConectedUser; ?>
             <a href="index.php?action=Account" style="">Mon compte</a>
             <a href="index.php?action=reservation" style="">Reserver une table</a>
             <a href="index.php?action=order" style="">commander des aliments</a>
             
           <div><?php $user = $_SESSION['user'];echo '<p>bonjour </p>'.'  <span><a href="index.php?action=Account" style=""> '.' '.$ConectedUser -> getnom().' '.$ConectedUser -> getprenom().'</a></span>' ?></div>
            <a href="index.php?action=LogOff" style="">Deconnexion</a>
+        <?php } elseif (isset($_SESSION['admin'])) { ?>
+            <a href="index.php?action=LogOff" style="">Deconnexion</a>
+
         <?php } ?>
     </div>
 </header>

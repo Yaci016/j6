@@ -61,10 +61,10 @@ function logIn()
         $logInUSer = new \restaurant\model\frontEnd\UserManager();
         $login = $logInUSer->signInUser($email, $mdp);
         if ($login === false) {
-            $logInAdmin = new \restaurant\model\backEnd\AdminConnexion();
+            $logInAdmin = new \restaurant\model\backEnd\AdminManager();
             $logInAdmin->signInAdmin($email, $mdp);
-            header('location:index.php');
         }
+        header('location:index.php');
     }
 }
 function ViewAccount()

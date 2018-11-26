@@ -12,6 +12,8 @@ if (isset($_SESSION['admin'])) {
 if (isset($_POST['id'])){
     $id = $_POST['id'];
 }
+
+
 if (isset($_GET['action'])) {
     $action = $_GET['action'] ;
     //rajouter des if else if ici pour les pages du site

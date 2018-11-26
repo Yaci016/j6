@@ -1,5 +1,5 @@
 <?php
 require 'admin.php';
-require 'AdminConnexion.php';
+require 'AdminManager.php';
 
 
