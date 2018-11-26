@@ -1,0 +1,49 @@
+<?php ob_start(); ?>
+<main>
+<form method="post" enctype="multipart/form-data">
+    <fieldset>
+        <table>
+            <legend><i class="fas fa-check"></i> Caractéristiques </legend>
+            <tr>
+                <td>Nom : </td>
+                <td><input type="text" name="nom"></td>
+            </tr>
+            <tr>
+                <td>Description : </td>
+                <td><input type="text" name="nom"></td>
+            </tr>
+            <tr>
+                <td>Photo : </td>
+                <td><input type="file" value="Parcourir" name="Parcourir"></td>
+            </tr>
+            <tr>    
+        </table>
+        <p><i class="fas fa-exclamation-triangle"></i> Merci de renommer le fichier de la photo avec le nom l'aliment <strong>avant</strong> de l'envoyer</p>
+    </fieldset>
+</form>    
+
+<form>
+    <fieldset class="field2">
+        <table>
+            <legend><i class="fas fa-retweet"></i> Approvisionnement</legend>
+            <tr>
+                <td>Stock initial :</td>
+                <td><input type="number" name="stock"></td>
+            </tr>
+            <tr>
+                <td>prix d'achat :</td>
+                <td><input type="number" name="achat"> €</td>
+            </tr>
+            <tr>
+                <td>Prix de vente :</td>
+                <td><input type="number" name="vente"> €</td>
+            </tr>        
+        </table>
+    </fieldset>
+    <button type="button" id="valider" class="créer">Ajouter</button>
+    <button type="button" id="vider" class="annuler">Annuler</button>
+</form>
+</main>
+<?php $content = ob_get_clean();
+$title = 'Gestion aliments';
+require 'view/layout.phtml'; ?>

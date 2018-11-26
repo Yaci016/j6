@@ -25,4 +25,16 @@ class Reservation extends Manager {
             $_SESSION['ReservationRate'] = true;
         }
     }
+    public function GetList(){
+        $bdd = $this-> dbConnect();
+        $sql = "SELECT * FROM `reservation`";
+        $reservations = [];
+        $ajouterReservationVar = $bdd -> prepare($sql);
+        $ajouterReservationVar -> execute();
+
+       while ($donnees = $ajouterReservationVar->fetch()) {
+            $reservations[] = $donnees;
+        };
+        return $reservations;
+    }
 }

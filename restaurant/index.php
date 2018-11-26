@@ -27,13 +27,31 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'SignUp'://page d'inscription
-            ViewSignUp();
+            global $ConectedAdmin;
+            global $ConectedUser;
+            if (!isset($ConectedAdmin) && !isset($ConectedUser)){
+                ViewSignUp();
+            } else {
+                error();
+            }
             break;
         case 'checkSignUp'://page de validation d'inscription (juste un script avec un header)
+        global $ConectedAdmin;
+        global $ConectedUser;
+        if (!isset($ConectedAdmin) && !isset($ConectedUser)){
             CheckSignUpinfo();
+        } else {
+            error();
+        }
             break;
         case 'LogIn'://page de connexion
+        global $ConectedAdmin;
+        global $ConectedUser;
+        if (!isset($ConectedAdmin) && !isset($ConectedUser)){
             logIn();
+        } else {
+            error();
+        }
             break;
         case 'Account':
             //CheckEditInfo();
@@ -79,6 +97,45 @@ if (isset($_GET['action'])) {
             break;
         case 'LogOff':
             LogOff();
+            break;
+            case 'Meals': 
+            global $ConectedUser;
+            if (isset($ConectedAdmin)) {
+            Meals();
+            } else {
+                header('location:index.php?action=home');
+            }
+            break;
+            case 'AddMeal':
+            global $ConectedUser;
+            if (isset($ConectedAdmin)) {
+                addMeal();
+            } else {
+                 header('location:index.php?action=home');
+            }
+            break;
+             case 'EditMeal': 
+              if (isset($ConectedAdmin)) {
+            editMeal();
+            } else {
+                header('location:index.php?action=home');
+            }
+            break;
+             case 'AdministrationReservation': 
+             global $ConectedUser;
+              if (isset($ConectedAdmin)) {
+            AdminReservation();
+            } else {
+                header('location:index.php?action=home');
+            }
+            break;
+             case 'EditCommande': 
+             global $ConectedUser;
+              if (isset($ConectedAdmin)) {
+            editCommande();
+            } else {
+                header('location:index.php?action=home');
+            }
             break;
         case 'error':
             error();

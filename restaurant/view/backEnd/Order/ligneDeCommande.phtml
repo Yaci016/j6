@@ -1,0 +1,23 @@
+<?php ob_start();?>
+<main>
+	<h2>Liste des commandes :</h2>
+	<table style="width:100%">
+		<tr>
+			<th>id_meal</th>
+			<th>quantité</th>
+			<th>prix_unitaire</th>
+		</tr>
+
+		<?php foreach($liste_Lignecommandes as $Lignecommandes) {  ?>
+		<tr>
+			<td><p><?= $Lignecommandes['id_meal'] ?></p></td>
+			<td><p><?= $Lignecommandes['quantité'] ?></p></td>
+			<td><p><?= $Lignecommandes['prix_unitaire'] ?> €</p></td>
+		</tr>
+
+	<?php } ?>
+	</table>
+</main>
+<?php $content = ob_get_clean();
+$title = 'infos commandes num°'.$_GET['idCommande'] ;
+require 'view/layout.phtml'; ?>

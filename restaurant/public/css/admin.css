@@ -1,0 +1,54 @@
+.Content_Admin_home {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.Content_Admin_home a {
+    flex-basis: 25%;
+    text-align: center;
+    height: 1rem;
+    background: red;
+    padding: 1%;
+    margin: 1%;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+
+}
+main {
+    max-width: 80vw;
+    margin:0 auto;
+}
+#login_group {
+    justify-content: flex-end;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%; /* à adapter selon vos contraintes */
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+   
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+table button {
+    background:transparent;
+    border:none;
+    margin-left: 1rem
+}
+a {
+    text-decoration: none;
+    color:red;
+}
+a i{
+color:black;
+
+}

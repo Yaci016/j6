@@ -32,4 +32,29 @@ class OrderManager extends Manager
         $insereLigneDecommandeBDD = $bdd->prepare($sql);
         $insereLigneDecommandeBDD->execute(array($id_Commande, $idMeal, $quantite, $prix_unit));
     }
+    public function getlistOrders(){
+        $bdd = $this-> dbConnect();
+        $sql = "SELECT * FROM `commandes`";
+        $commandes = [];
+        $Liste_commandes = $bdd -> prepare($sql);
+        $Liste_commandes -> execute();
+
+       while ($donnees = $Liste_commandes->fetch()) {
+            $commandes[] = $donnees;
+        };
+        return $commandes;
+    }
+
+    public function getlistOrdersLines($id){
+        $bdd = $this-> dbConnect();
+        $sql = "SELECT * FROM `ligne_de_commande` WHERE idCommande = ?";
+        $ligne_de_commandes = [];
+        $Liste_commandeLines = $bdd -> prepare($sql);
+        $Liste_commandeLines -> execute(array($id));
+
+       while ($donnees = $Liste_commandeLines->fetch()) {
+            $ligne_de_commandes[] = $donnees;
+        };
+        return $ligne_de_commandes;
+    }
 }

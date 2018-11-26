@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="public/css/normalize-3.0.3.min.css">
     <link rel="stylesheet" href="public/vendors/fontawesome5.5/css/all.css">
     <link rel="stylesheet" href="public/css/main.css">
+    <?php if (isset($_SESSION['admin'])) { ?>
+        <link rel="stylesheet" href="public/css/admin.css">
+        <?php }?>
     <script src="public/js/main.js"></script>
 </head>
 <body>

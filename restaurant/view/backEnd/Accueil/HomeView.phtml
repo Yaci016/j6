@@ -1,40 +1,16 @@
-<?php ob_start();
-?>
-    <style>
-        .Content_Admin_home {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-        }
-
-        .Content_Admin_home a {
-            flex-basis: 25%;
-            text-align: center;
-            height: 1rem;
-            background: red;
-            padding: 1%;
-            margin: 1%;
-            border-radius: 5px;
-            text-decoration: none;
-            color: white;
-        }
-    </style>
+    <?php ob_start();?>
     <main class="Content_Admin_home">
 
-        <a href="index.php?action=AddMeal" title="Rajout d'aliment a la liste disponible">
-            Editer aliments
-        </a>
-
-        <a href="index.php?action=EditMeal" title="Rajout d'aliment a la liste disponible">
-            Ajouter aliment
+        <a href="index.php?action=Meals" title="Editer la liste d'aliment disponible">
+            Gestion des aliments
         </a>
 
         <a href="index.php?action=AdministrationReservation" title="Rajout d'aliment a la liste disponible">
-            voir les reservation
+            Gestion des reservations
         </a>
-        <a href="index.php?action=EditCommande" title="Rajout d'aliment a la liste disponible">
-            gerer les commandes
+
+        <a href="index.php?action=EditCommande" title="gestion des commande displonible">
+            Gestion des commandes
         </a>
 
     </main>

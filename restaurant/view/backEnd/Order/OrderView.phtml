@@ -1,0 +1,42 @@
+<?php ob_start(); ?>
+<main>
+	<h2>Liste des commandes :</h2>
+	<table style="width:100%">
+		<tr>
+			<th>id</th>
+			<th>id utilisateur</th>
+			<th>prix total</th>
+			<th>date</th>
+			<td>Plus d'information</td>
+			<th>Editer</th>
+			<th>supprimer</th>
+		</tr>
+		<?php foreach($liste_commandes as $commande) {  ?>
+		<tr>
+			<td><p><?= $commande['id'] ?></p></td>
+			<td><p><?= $commande['id_user'] ?></p></td>
+			<td><p><?= $commande['prix_total'] ?> €</p></td>
+			<td><p><?= $commande['date'] ?></p></td>
+			<td>
+					<a href="index.php?action=EditCommande&idCommande=<?= $commande['id'] ?>" ><i class="fas fa-plus"></i></a>
+			</td>
+			<td>
+			<form action="" method="post">
+			<input type="hidden" name="id" value="<?= $commande['id'] ?>">
+				<button type="submit" name="edit"><i class="fas fa-pen"></i></button>
+			</form>
+			</td>
+			<td>
+			<form action="" method="post">
+			<input type="hidden" name="id" value="<?= $commande['id'] ?>">
+				<button type="submit" name="delete"><i class="fas fa-times"></i></button>
+			</form>
+			</td>
+		</tr>
+
+	<?php } ?>
+	</table>
+</main>
+<?php $content = ob_get_clean();
+$title = 'Gestion commandes';
+require 'view/layout.phtml'; ?>

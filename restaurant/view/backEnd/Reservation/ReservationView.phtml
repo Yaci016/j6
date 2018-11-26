@@ -1,0 +1,38 @@
+<?php ob_start(); ?>
+<main>
+	<h2>Liste des reservations :</h2>
+	<table style="width:100%">
+		<tr>
+			<th>id</th>
+			<th>id utilisateur</th>
+			<th>date</th>
+			<th>nombre couverts</th>
+			<th>Editer</th>
+			<th>supprimer</th>
+		</tr>
+		<?php foreach($liste_reservation as $reservation) {  ?>
+		<tr>
+			<td><p><?= $reservation['id'] ?></p></td>
+			<td><p><?= $reservation['id_user'] ?></p></td>
+			<td><p><?= $reservation['date'] ?></p></td>
+			<td><p><?= $reservation['nb_couverts'] ?></p></td>
+			<td>
+			<form action="index.php?action=EditMeal" method="post">
+			<input type="hidden" name="id" value="<?= $reservation['id'] ?>">
+				<button type="submit" name="edit"><i class="fas fa-pen"></i></button>
+			</form>
+			</td>
+			<td>
+			<form action="index.php?action=Meals" method="post">
+			<input type="hidden" name="id" value="<?= $reservation['id'] ?>">
+				<button type="submit" name="delete"><i class="fas fa-times"></i></button>
+			</form>
+			</td>
+		</tr>
+
+	<?php } ?>
+	</table>
+</main>
+<?php $content = ob_get_clean();
+$title = 'Gestion aliments';
+require 'view/layout.phtml'; ?>
