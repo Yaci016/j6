@@ -9,21 +9,17 @@ class MealManager extends \restaurant\model\ClassMixte\Manager
 {
 
     public function add(Meal $meal) {
-        $id =           $meal->id();
-        $name =         $meal ->name();
-        $categories =   $meal ->categories();
+        $name =         $meal -> name();
+        $categories =   $meal -> categories();
         $description =  $meal -> description();
         $prix_achat =   $meal -> prix_achat();
         $prix_vente =   $meal -> prix_vente();
         $stock =        $meal -> stock();
         $photo =        $meal -> photo();
-
         $bdd = $this -> dbConnect();
-
         $sql = "INSERT INTO `meal` ( `name`, `categories`, `description`, `prix_achat`, `prix_vente`, `stock`, `photo`) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
         $insertMeal = $bdd -> prepare($sql);
-        $insertMeal = execute(array($name,$categories,$description,$prix_achat,$prix_vente,$stock,$photo));
-
+        $insertMeal -> execute(array($name,$categories,$description,$prix_achat,$prix_vente,$stock,$photo));
     }
 
     public function delete(Meal $meal) {
@@ -55,7 +51,6 @@ class MealManager extends \restaurant\model\ClassMixte\Manager
     $bdd = $this -> dbConnect();
         $getMeals = "SELECT * FROM `meal`";
         $Meals = [];
-
         $reponseIndex = $bdd->prepare($getMeals);
         $reponseIndex->execute();
         while ($donnees = $reponseIndex->fetch()) {

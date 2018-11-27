@@ -272,7 +272,14 @@ function checkErrors()
     if (isset($_SESSION['logIn_success_admin'])) {
         unset($_SESSION['logIn_success_admin']);
         $message = 'Bon retour Monsieur L\'admin.';
-
+    };
+    if (isset($_SESSION['success_uploading_file'])) {
+        unset($_SESSION['success_uploading_file']);
+        $message = 'Le fichier a bien etait upload dans la base de donnee.';
+    };
+    if (isset($_SESSION['error_uploading_file'])) {
+        unset($_SESSION['error_uploading_file']);
+        $message = 'Le fichier n\'a pas etait upload dans la base de donnee.';
     };
 
     isset($message) ? $message_info = '<div id="message_info" style="border:1px solid' . $color . ';"><p style="color:black;font-weight:bold;">' . stripslashes($message) . '</p></div>' : null;

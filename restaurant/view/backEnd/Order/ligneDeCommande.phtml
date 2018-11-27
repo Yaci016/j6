@@ -1,5 +1,7 @@
 <?php ob_start();?>
 <main>
+	<?php  if ($liste_Lignecommandes !== []) { ?>
+
 	<h2>Liste des commandes :</h2>
 	<table style="width:100%">
 		<tr>
@@ -17,6 +19,9 @@
 
 	<?php } ?>
 	</table>
+	<?php  } else {
+	echo 'pas de ligne de commande ...';
+	}?>
 </main>
 <?php $content = ob_get_clean();
 $title = 'infos commandes num°'.$_GET['idCommande'] ;

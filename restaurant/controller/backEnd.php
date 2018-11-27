@@ -17,13 +17,74 @@ function Meals(){
     require_once 'view/backEnd/Meals/MealsView.Phtml';
 }
 function addMeal(){
+	if (isset($_POST['submit'])) {
+		var_dump($_POST);
+		var_dump($_FILES);
+		//$_POST['filename']
+		$target_dir = "public/images/meals/";
+		$target_file = $target_dir . $filee;
+		$uploadOk = 1;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		// Check if image file is a actual image or fake image
+		if(isset($_POST["submit"])) {
+    	$check = getimagesize($_FILES["Parcourir"]["tmp_name"]);
+    	if($check !== false) {
+        //echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    	} else {
+        $uploadOk = 0;
+    	}
+}
+// Check if file already exists
+if (file_exists($target_file)) {
+    //echo "Sorry, file already exists.";
+    $uploadOk = 0;
+}
+// Check file size
+if ($_FILES["Parcourir"]["size"] > 500000) {
+    //echo "Sorry, your file is too large.";
+    $uploadOk = 0;
+}
+// Allow certain file formats
+if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+&& $imageFileType != "gif" ) {
+    //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    $uploadOk = 0;
+}
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+    //echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+} else {
+    if (move_uploaded_file($_FILES["Parcourir"]["tmp_name"], $target_file)) {
+		//echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+		$_SESSION['success_uploading_file'] = true;
+		$donnees = ['name' => $_POST['nom'],'categories'=> $_POST['Categorie'],'description'=> $_POST['description'],'prix_achat'=> $_POST['achat'],'prix_vente'=> $_POST['vente'],'stock'=> $_POST['stock'],'photo'=>$_POST['filename'] ];
+		$meal = new Meal($donnees);
+		$mealManager = new MealManager();
+		$mealManager -> add($meal);
+		
+    } else {
+		//echo "Sorry, there was an error uploading your file.";
+		$_SESSION['error_uploading_file'] = true;
+    }
+}
+	}
 	    require_once 'view/backEnd/Meals/addMealView.phtml';
 }
 function editMeal(){
+	
+	if (isset($_POST['id'])) {
 		$meals = new MealManager();
 		$donnees = $meals -> getMeal($_POST['id']);
-		$meal = new Meal($donnees);
-		$meals -> update($meal);
+		if (isset($_POST['Submitedit'])) {
+			$donnees = ['id' => $_POST['id'],'name' => $_POST['nom'],'categories'=> $_POST['Categorie'],'description'=> $_POST['description'],'prix_achat'=> $_POST['achat'],'prix_vente'=> $_POST['vente'],'stock'=> $_POST['stock'],'photo'=> $_POST['filename']];
+			$meal = new Meal($donnees);
+			$meals -> update($meal);
+			header('location:index.php?action=Meals');
+		}
+		require_once 'view/backEnd/Meals/editMealView.phtml';
+	} 
 }
 
 function deleteMeal() {

@@ -4,7 +4,6 @@
     flex-wrap: nowrap;
     justify-content: space-between;
 }
-
 .Content_Admin_home a {
     flex-basis: 25%;
     text-align: center;
@@ -15,11 +14,10 @@
     border-radius: 5px;
     text-decoration: none;
     color: white;
-
 }
 main {
     max-width: 80vw;
-    margin:0 auto;
+    margin: 0 auto;
 }
 #login_group {
     justify-content: flex-end;
@@ -27,28 +25,59 @@ main {
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%; /* à adapter selon vos contraintes */
+    width: 100%;
+    /* à adapter selon vos contraintes */
 }
-
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
-   
 }
 tr:nth-child(even) {
     background-color: #dddddd;
 }
 table button {
-    background:transparent;
-    border:none;
+    background: transparent;
+    border: none;
     margin-left: 1rem
 }
 a {
     text-decoration: none;
-    color:red;
+    color: red;
 }
-a i{
-color:black;
-
+a i {
+    color: black;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.center table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    /* à adapter selon vos contraintes */
+}
+.center td, th {
+    border: none;
+    text-align: left;
+    padding: 8px;
+}
+.center tr:nth-child(even) {
+    background-color: transparent;
+}
+.center button {
+    margin-top: 1rem;
+    border-radius: 5px;
+    border: none;
+}
+button[name="submit"] {
+    background: #98FB98;
+}
+button[name="Submitedit"] {
+    background: gold;
+}
+.annuler {
+    background: red;
 }
