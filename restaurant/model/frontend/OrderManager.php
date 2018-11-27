@@ -16,21 +16,16 @@ use restaurant\model\ClassMixte\Manager;
 
 class OrderManager extends Manager
 {
-    public function AddOrder($idUser, $TotalPrice, $date)
+    public function AddOrder(Order $order)
     {
+        $id_user = $order->id_user();
+        $prix_total = $order->prix_total();
+        $date = $order->date();
         $bdd = $this->dbConnect();
         $sql = "INSERT INTO `commandes` ( `id_user`, `prix_total`, `date`) VALUES (?,?,?)";
         $InsererCommanderBdd = $bdd->prepare($sql);
-        $InsererCommanderBdd->execute(array($idUser, $TotalPrice, $date));
+        $InsererCommanderBdd->execute(array($id_user, $prix_total, $date));
         return $lastId = $bdd->lastInsertId();
-    }
-
-    public function AddOrderDetails($id_Commande, $idMeal, $quantite, $prix_unit)
-    {
-        $bdd = $this->dbConnect();
-        $sql = "INSERT INTO `ligne_de_commande` (`idCommande`, `id_meal`, `quantité`, `prix_unitaire`) VALUES (?, ?, ?, ?)";
-        $insereLigneDecommandeBDD = $bdd->prepare($sql);
-        $insereLigneDecommandeBDD->execute(array($id_Commande, $idMeal, $quantite, $prix_unit));
     }
     public function getlistOrders(){
         $bdd = $this-> dbConnect();
@@ -45,16 +40,5 @@ class OrderManager extends Manager
         return $commandes;
     }
 
-    public function getlistOrdersLines($id){
-        $bdd = $this-> dbConnect();
-        $sql = "SELECT * FROM `ligne_de_commande` WHERE idCommande = ?";
-        $ligne_de_commandes = [];
-        $Liste_commandeLines = $bdd -> prepare($sql);
-        $Liste_commandeLines -> execute(array($id));
 
-       while ($donnees = $Liste_commandeLines->fetch()) {
-            $ligne_de_commandes[] = $donnees;
-        };
-        return $ligne_de_commandes;
-    }
 }

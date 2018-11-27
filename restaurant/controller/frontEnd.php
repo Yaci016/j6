@@ -153,13 +153,16 @@ function ConfirmOrder()
 {
     global $ConectedUser;
     $listeCommande = json_decode($_POST['data'], true);
-    $order = new \restaurant\model\frontEnd\OrderManager();
+    $orderManager = new \restaurant\model\frontEnd\OrderManager();
+    $orderLineManager = new \restaurant\model\frontEnd\OrderLineManager();
     $prix_total = $_POST['prix_total'];
     $date = date("Y-m-d H:i:s");
+    $order = new \restaurant\model\frontEnd\Order(['id_user' => $ConectedUser->getid(), 'prix_total' => $prix_total, 'date' => $date]);
     //Pour commande `id_user`, `prix_total`, `date` // Pour ligne de commande $id_Commande,$idMeal,$quantite,$prix_unit
-    $idCommande = $order->AddOrder($ConectedUser->getid(), $prix_total, $date);
+    $idCommande = $orderManager->AddOrder($order);
     foreach ($listeCommande as $key => $value) {
-        $order->AddOrderDetails($idCommande, $value['id'], $value['quantite'], $value['prixUnitaire']);
+        $orderLine = new \restaurant\model\frontEnd\OrderLine(['idCommande' => $idCommande, 'id_meal' => $value['id'], 'quantité' => $value['quantite'], 'prix_unitaire' => $value['prixUnitaire']]);
+        $orderLineManager->Add($orderLine);
     }
 }
 

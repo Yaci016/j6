@@ -40,7 +40,7 @@ function AdminReservation(){
 }
 function editCommande(){
 	if (isset($_GET['idCommande'])) {
-		$ligneCommande = new restaurant\model\frontEnd\OrderManager();
+        $ligneCommande = new restaurant\model\frontEnd\OrderLineManager();
 		$liste_Lignecommandes = $ligneCommande -> getlistOrdersLines($_GET['idCommande']);
 		require_once 'view/backEnd/Order/ligneDeCommande.phtml';
 	} else {
